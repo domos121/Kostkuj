@@ -1,0 +1,126 @@
+## Version: 0.3
+## Autor: domos121
+######################################################################################
+######################################################################################
+##                                                                                  ##
+##  ##   ##     ######       #######  ############  ##   ##   ##      ##        ##  ##
+##  ##  ##    ##      ##   ##              ##       ##  ##    ##      ##        ##  ##
+##  ## ##     ##      ##   ##              ##       ## ##     ##      ##        ##  ##
+##  ####      ##      ##     ###           ##       ####      ##      ##        ##  ##
+##  ####      ##      ##       ###         ##       ####      ##      ##        ##  ##
+##  ##  ##    ##      ##         ##        ##       ##  ##    ##      ##        ##  ##
+##  ##   ##   ##      ##         ##        ##       ##   ##   ##      ##  ##    ##  ##
+##  ##    ##    ######    #######          ##       ##    ##    ######     ######   ##
+##                                                                                  ##
+######################################################################################
+######################################################################################
+
+###########
+## MYSQL ##
+###########
+MySQL:
+  ## Ip databázového serveru.
+  host: '0.0.0.0'
+
+  ## Port databázového serveru, většinou 3306.
+  port: '3306'
+
+  ## Název databáze, ke která se má plg připojit.
+  database: 'minecraft'
+
+  ## Uživatelské jméno pro připojení k atabázi.
+  username: 'root'
+
+  ## Heslo pro připojení k databázi.
+  password: '123'
+
+  ## prefix
+  prefix: ''
+
+  ## TABULKY
+  tables:
+      ## Enabled (aktivovanej ucet ci nikoli) lze napojit na jiné tabulky.
+      ## (neplatí pro ní prefix).
+    tableusers:
+      tablename: 'cc_users'
+      columns:
+        id: 'id'
+        uuid: 'uuid'
+        username: 'username'
+        enabled: 'enabled'
+    tableplace:
+      tablename: 'place'
+    tablebreak:
+      tablename: 'break'
+
+###########
+## x-ray ##
+###########
+itemlistchacker:
+ - DIAMOND_ORE
+ - EMERALD_ORE
+ # - IRON_ORE
+ # - COAL_ORE
+ # - GOLD_ORE
+
+#################
+## AutoMessage ##
+#################
+## Čas opakovaného odesílání v s.
+repeteTime: 1200
+
+## JSON syntaxe!
+## #info# [Info]
+## #prefix# [Kostkuj]
+autoMessage:
+ - '{"text":"test","color":"red"}'
+ - '{"text":"test2","color":"blue"}'
+
+##################
+## TimeSettings ##
+##################
+
+timeArray:
+- '02-00,test'
+- '04-00,test'
+- '06-00,test'
+- '08-00,test'
+- '10-00,test'
+- '12-00,test'
+- '14-00,test'
+- '16-00,test'
+- '18-00,test'
+- '20-00,test'
+- '22-00,test'
+- '00-00,test'
+
+###################
+## MutedCommands ##
+###################
+
+muteCommand:
+ - /r
+ - /me
+ - /msg
+ - /tpa
+
+#################
+## Break Event ##
+#################
+
+Events:
+  BreakEvent:
+    startTime:
+    closeTime:
+    PocetCC:
+    Procenta:
+
+#############
+## Discord ##
+#############
+
+Discord:
+  BotsToken: 'GetDiscordBotsTokken'
+  BotsChannel: 'GetNameDiscordChannel'
+
+allowAutoWriter: true

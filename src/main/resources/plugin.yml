@@ -1,0 +1,230 @@
+name: Kostkuj
+main: by.domos.Kostkuj.Main
+version: 2.0
+api-version: 1.13
+depend: [Vault]
+
+commands:
+  kostkuj:
+    description: Menu Kostkuj
+    aliases: [k]
+  unban:
+    description: /unban <name>
+    aliases: [unipban, unmute]
+  checkip:
+    description: /checkip <ip>
+  broadcast:
+    description: /bc <msg>
+    aliases: [bc]
+  test:
+    description: /test <time>
+  playerinfo:
+    description: /playerinfo <name>
+    aliases: [pi, playeri]
+  pravidla:
+    description: /pravidla <name>
+  prikazy:
+      description: /prikazy <name>
+      aliases: [cmd]
+  trest:
+      description: /trest
+      aliases: [ban, mute, tempban, ipban, kick, tr]
+  checkban:
+      description: /checkban <[user]|id:[trest id]|ip:[ipid]>
+  project:
+      description: /project help
+      aliases: [projekt]
+  voucher:
+    description: Vytváření a editace voucherů.
+  votemute:
+  stavba:
+  domos:
+permissions:
+  kostkuj.pravidla:
+    default: OP
+
+  kostkujplg.anticheat.use:
+    default: OP
+
+  kostkuj.toptime:
+    default: OP
+
+  kostkuj.ban.kick.information:
+    default: OP
+
+  kostkuj.checkban:
+    default: OP
+
+  kostkuj.unban:
+    default: OP
+
+  kostkuj.unban.slient:
+    default: OP
+
+  kostkuj.checkip:
+    default: OP
+
+  kostkuj.test:
+    default: OP
+
+  kostkuj.playerinfo:
+    default: OP
+
+  kostkuj.playerinfo.other:
+    default: OP
+
+  kostkuj.join.info:
+    default: OP
+
+  kostkuj.antispam:
+    default: OP
+
+  kostkuj.copyhome:
+    default: OP
+
+  kostkuj.ja:
+    default: OP
+
+  kostkuj.death:
+    default: OP
+
+  kostkuj.project:
+    default: OP
+
+  kostkuj.project.accept:
+    default: OP
+
+  kostkuj.project.setitem:
+    default: OP
+
+  kostkuj.project.get:
+    default: OP
+
+  kostkuj.project.complete:
+    default: OP
+
+  kostkuj.project.close:
+    default: OP
+
+  kostkuj.death.other:
+    default: OP
+
+  kostkuj.join.send.kick.reason:
+    default: OP
+
+  kostkuj.menu:
+    default: OP
+
+  kostkuj.mute.baypass:
+    default: OP
+
+  kostkuj.broadcast:
+    default: OP
+
+  kostkuj.restart:
+    default: OP
+
+  kostkuj.set.trest:
+    default: OP
+
+  kostkuj.keepinv:
+    default: OP
+
+  kostkuj.pozemek:
+    default: OP
+
+  kostkuj.save:
+    default: OP
+
+  kostkuj.prikazy:
+    default: OP
+
+  kostkuj.voucher:
+    default: OP
+
+  kostkuj.voucher.create:
+    default: OP
+
+  kostkuj.voucher.get:
+    default: OP
+
+  kostkuj.voucher.use:
+    default: OP
+
+  kostkuj.voucher.help:
+    default: OP
+
+  kostkuj.votemute:
+    default: OP
+
+  kostkuj.votemute.vote:
+      default: OP
+
+  kostkuj.votemute.create:
+      default: OP
+
+  kostkuj.join.slient:
+    default: OP
+
+  kostkuj.nynijeafk:
+    default: OP
+
+  kostkuj.default:
+    default: OP
+    children:
+      kostkuj.menu: true
+      kostkuj.pravidla: true
+      kostkuj.prikazy: true
+      kostkuj.playerinfo: true
+      kostkuj.toptime: true
+      kostkuj.death: true
+      kostkuj.votemute: true
+      kostkuj.votemute.vote: true
+      kostkuj.voucher: true
+      kostkuj.voucher.use: true
+
+
+  kostkuj.vip:
+    default: OP
+    children:
+      kostkuj.default: true
+      kostkuj.votemute.create: true
+
+  kostkuj.mod:
+    default: OP
+    children:
+      kostkuj.vip: true
+      kostkuj.set.trest: true
+      kostkuj.unban: true
+      kostkuj.checkip: true
+      kostkuj.playerinfo: true
+      kostkuj.playerinfo.other: true
+      kostkuj.save: true
+      kostkuj.join.info: true
+      kostkuj.join.send.kick.reason: true
+      kostkujplg.anticheat.use: true
+      kostkuj.checkban: true
+      kostkuj.death.other: true
+      kostkuj.project: true
+      kostkuj.project.setitem: true
+      kostkuj.project.accept: true
+      kostkuj.project.get: true
+      kostkuj.project.complete: true
+      kostkuj.project.close: true
+      kostkuj.copyhome: true
+      kostkuj.nynijeafk: true
+
+  kostkuj.*:
+    default: OP
+    children:
+      kostkuj.mod: true
+      kostkuj.broadcast: true
+      kostkuj.restart: true
+      kostkuj.mute.baypass: true
+      kostkuj.pozemek: true
+      kostkuj.unban.slient: true
+      kostkuj.voucher: true
+      kostkuj.voucher.create: true
+      kostkuj.voucher.use: true
+      kostkuj.voucher.get: true
+      kostkuj.join.slient: true
