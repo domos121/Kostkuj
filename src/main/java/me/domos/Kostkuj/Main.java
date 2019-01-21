@@ -17,6 +17,7 @@ import me.domos.Kostkuj.server.listener.cmds.bans.CMDTrest;
 import me.domos.Kostkuj.server.listener.cmds.bans.UnBan;
 import me.domos.Kostkuj.server.listener.cmds.domos.Domos;
 import me.domos.Kostkuj.server.listener.cmds.kostkuj.Kostkuj;
+import me.domos.Kostkuj.server.listener.cmds.kostkuj.Kostkuj_Save;
 import me.domos.Kostkuj.server.listener.cmds.playerinfo.CheckBan;
 import me.domos.Kostkuj.server.listener.cmds.playerinfo.CheckIp;
 import me.domos.Kostkuj.server.listener.cmds.playerinfo.PlayerInfo;
@@ -72,6 +73,8 @@ public class Main extends JavaPlugin implements Listener{
     }
 
     public void onDisable() {
+        new Kostkuj_Save().saveWorld();
+        DiscordConnect.stopBot();
     }
     
     private void commandLoad(){

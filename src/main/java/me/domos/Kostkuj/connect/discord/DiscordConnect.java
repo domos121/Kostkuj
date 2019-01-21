@@ -21,6 +21,7 @@ public class DiscordConnect {
     public static void startBot(){
         try {
             DiscordConnect.jda = new JDABuilder(AccountType.BOT).setToken(ECfg.DISCORD_TOKEN.getValue()).buildBlocking();
+            sendMsg(":white_check_mark:**Kostkuj** *se připojil*.");
         } catch (LoginException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -28,9 +29,13 @@ public class DiscordConnect {
         }
     }
 
+    public static void stopBot(){
+        sendMsg(":octagonal_sign:**Kostkuj** *se odpojil*.");
+    }
+
     public static void sendMsg(String msg, Player p){
         TextChannel text = jda.getTextChannelsByName(channel, true).get(0);
-        msg = "**" + p.getDisplayName() + ":** " + msg.replace("@", "[ZAVINÁČ]");
+        msg = "<:green_arrow:536992110726086686>**" + p.getDisplayName() + "** » " + msg.replace("@", "[ZAVINÁČ]");
         String var0 = chatTranslateToDiscord(msg);
         text.sendMessage(var0).queue();
     }
