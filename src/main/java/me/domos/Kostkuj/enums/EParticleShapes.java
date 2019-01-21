@@ -16,7 +16,7 @@ public enum EParticleShapes {
     WING_DEMON("demonwing", new ParticleShapeWing()),
     WING_OUSKA_S_OCASKEM("ouskasocasemwing", new ParticleShapeWing()),
     WING_ANGEL("angelwing", new ParticleShapeWing()),
-    WING_V_1_15("v1.15wing", new ParticleShapeWing()),
+    WING_V_1_15("v1_15wing", new ParticleShapeWing()),
     STOP("Stop", null);
 
     private final String name;
