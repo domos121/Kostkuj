@@ -47,8 +47,6 @@ public class Main extends JavaPlugin implements Listener{
     public static final SendSystem ss = new SendSystem();
     private PluginManager pm = Bukkit.getPluginManager();
     private AutoMessager am = new AutoMessager();
-
-
     public static Plugin plugin = null;
 
     @Override

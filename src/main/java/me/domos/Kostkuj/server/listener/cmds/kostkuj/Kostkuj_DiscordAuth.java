@@ -13,41 +13,48 @@ import org.bukkit.entity.Player;
 
 public class Kostkuj_DiscordAuth {
 
-    KeyGenerator keyGenerator = new KeyGenerator();
-    SendSystem ss = new SendSystem();
-    FileManager fm = FileManager.getInstance();
+    private KeyGenerator keyGenerator = new KeyGenerator();
+    private SendSystem ss = new SendSystem();
+    private FileManager fm = FileManager.getInstance();
 
-    public void auth(CommandSender sr, String[] args){
+    public void auth(CommandSender sr, String[] args) {
         Player p = Bukkit.getPlayer(sr.getName());
         KPlayer kp = KPlayer.getPlayer(p);
-
-        if (args[1].contains("uid:")){
-            String discordId = args[1].replace("uid:", "");
-            if (!DiscordAuth.isIdExist(discordId)){
-                ss.info(sr, "Tento uživatel nepožádal o autorizaci.");
+        String userAuthKey;
+        if (args[1].contains("uid:")) {
+            userAuthKey = args[1].replace("uid:", "");
+            if (!DiscordAuth.isIdExist(userAuthKey)) {
+                this.ss.info(sr, "Tento uživatel nepožádal o autorizaci.");
                 return;
             }
-            User dcuser = DiscordConnect.jda.getUserById(discordId);
-            DiscordAuth.discordIdList.remove(discordId);
-            String userAuthKey = keyGenerator.getSerialKey(30);
-            kp.setDiscordUserKey(discordId);
+
+            User dcuser = DiscordConnect.jda.getUserById(userAuthKey);
+            DiscordAuth.discordIdList.remove(userAuthKey);
+            userAuthKey = this.keyGenerator.getSerialKey(30);
+            kp.setDiscordUserKey(userAuthKey);
             kp.setAuthKey(userAuthKey);
             DiscordConnect.sendPrivateMsg("**SEND COMMAND IN GAME**: /k discordauth key:" + userAuthKey, dcuser);
-            ss.info(sr, "Byl vám odeslán autorizační klíč na discord.");
-        } else if (args[1].contains("key:")){
-            String userAuthKey = args[1].replace("key:", "");
-            if (kp.getDiscordUserKey() == null) return;
-            if (kp.getAuthKey() == null){
-                ss.info(sr, "Autorizaci se nepodařilo dokončit, zkus to znova.");
+            this.ss.info(sr, "Byl vám odeslán autorizační klíč na discord.");
+        } else if (args[1].contains("key:")) {
+            userAuthKey = args[1].replace("key:", "");
+            if (kp.getDiscordUserKey() == null) {
                 return;
             }
-            if (!kp.getAuthKey().equals(userAuthKey)){
-                ss.info(sr, "Tento klíč nepatří k vašemu účtu");
+
+            if (kp.getAuthKey() == null) {
+                this.ss.info(sr, "Autorizaci se nepodařilo dokončit, zkus to znova.");
                 return;
             }
-            ss.info(sr, "Discord authorizován. Nyní můžeš odesílazt zprávy z Discordu.");
-            fm.getDiscordAuth().set("DiscordAuth." + kp.getDiscordUserKey(), p.getUniqueId().toString());
-            fm.saveDiscordAuth();
+
+            if (!kp.getAuthKey().equals(userAuthKey)) {
+                this.ss.info(sr, "Tento klíč nepatří k vašemu účtu");
+                return;
+            }
+
+            this.ss.info(sr, "Discord authorizován. Nyní můžeš odesílazt zprávy z Discordu.");
+            this.fm.getDiscordAuth().set("DiscordAuth." + kp.getDiscordUserKey(), p.getUniqueId().toString());
+            this.fm.saveDiscordAuth();
         }
+
     }
 }

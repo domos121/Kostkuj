@@ -11,15 +11,16 @@ public class Kostkj_Writer {
 
     private SendSystem ss = new SendSystem();
 
-    public boolean onCommand(CommandSender sr, String args[]){
+    public Kostkj_Writer() {
+    }
 
-        if (WriteConfig.isStart()){
-            ss.info(sr, "Event momentálně probíhá.\n§6Otázka: §a" + WriteConfig.getQuestion());
+    public boolean onCommand(CommandSender sr, String[] args) {
+        if (WriteConfig.isStart()) {
+            this.ss.info(sr, "Event momentálně probíhá.\n§6Otázka: §a" + WriteConfig.getQuestion());
+            return true;
+        } else {
+            new WriterCore((Player)sr, (String)null, (String)null);
             return true;
         }
-
-        new WriterCore((Player) sr, null, null);
-
-        return true;
     }
 }

@@ -7,40 +7,41 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Kostkuj_Pozemek {
+    private SendSystem ss = new SendSystem();
 
-    SendSystem ss = new SendSystem();
+    public Kostkuj_Pozemek() {
+    }
 
-    private void setPozemek(String pozemek, String user, String owner){
-        new BukkitRunnable(){
-            int i = 0;  public void run() {
+    private void setPozemek(final String pozemek, final String user, final String owner) {
+        (new BukkitRunnable() {
+            int i = 0;
 
-                if (i == 0) {
+            public void run() {
+                if (this.i == 0) {
                     Bukkit.getServer().dispatchCommand(Bukkit.getServer().getPlayer(user), "/expand vert");
-                } else if (i == 1){
+                } else if (this.i == 1) {
                     Bukkit.getServer().dispatchCommand(Bukkit.getServer().getPlayer(user), "rg define " + pozemek + " " + owner);
-                } else if (i == 2){
+                } else if (this.i == 2) {
                     Bukkit.getServer().dispatchCommand(Bukkit.getServer().getPlayer(user), "rg setparent " + pozemek + " spawnii");
-                } else if (i == 3){
+                } else if (this.i == 3) {
                     Bukkit.getServer().dispatchCommand(Bukkit.getServer().getPlayer(user), "rg setpriority " + pozemek + " 40");
-                } else if (i > 3){
+                } else if (this.i > 3) {
                     this.cancel();
                 }
-                i++;
-            }
 
-        }.runTaskTimer(Main.plugin, 20, 20*2);
+                ++this.i;
+            }
+        }).runTaskTimer(Main.plugin, 20L, 40L);
     }
 
     public boolean onCommand(CommandSender sr, String[] args) {
-        if (args.length == 1){
-            ss.info(sr, "Use: /kostkuj pozemek <jmeno hrace>");
+        if (args.length == 1) {
+            this.ss.info(sr, "Use: /kostkuj pozemek <jmeno hrace>");
             return true;
+        } else {
+            String pozemek = "spawn_" + args[1];
+            this.setPozemek(pozemek, sr.getName(), args[1]);
+            return false;
         }
-
-        String pozemek = "spawn_" + args[1];
-
-        setPozemek(pozemek, sr.getName(), args[1]);
-
-        return false;
     }
 }

@@ -20,7 +20,6 @@ public class Kostkuj implements CommandExecutor, TabCompleter {
     private SendSystem ss = new SendSystem();
     private menu_buildr mb = new menu_buildr();
     private Kostkuj_Save s = new Kostkuj_Save();
-    private Kostkuj_CopyHome copyhome = new Kostkuj_CopyHome();
     private Kostkuj_Pozemek pozemek = new Kostkuj_Pozemek();
     private Kostkuj_TopTime topTime = new Kostkuj_TopTime();
     private Kostkuj_Death pd = new Kostkuj_Death();
@@ -47,7 +46,7 @@ public class Kostkuj implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sr, Command cmd, String commandLabel, String[] args) {
         if(args.length == 0){
-            mb.menu(sr, Main, "Main");
+            this.mb.menu(sr, Main, "Main");
             return true;
         }
 
@@ -56,87 +55,80 @@ public class Kostkuj implements CommandExecutor, TabCompleter {
                 ss.noPerm(sr);
                 return true;
             }
-            restart.onCommand(sr, args);
+            this.restart.onCommand(sr, args);
             return true;
         } else if(args[0].equalsIgnoreCase(ECmd.KOSTKUJ_STOP.getLastarg())) {
             if (!sr.hasPermission(ECmd.KOSTKUJ_STOP.getPerm())) {
-                ss.noPerm(sr);
+                this.ss.noPerm(sr);
                 return true;
             }
-            stop.onCommand(sr, args);
+            this.stop.onCommand(sr, args);
             return true;
         }else if(args[0].equalsIgnoreCase(ECmd.KOSTKUJ_SAVE.getLastarg())){
             if (!sr.hasPermission(ECmd.KOSTKUJ_SAVE.getPerm())){
-                ss.noPerm(sr);
+                this.ss.noPerm(sr);
                 return true;
             }
-            s.saveWorld();
-            return true;
-        } else if (args[0].equalsIgnoreCase(ECmd.KOSTKUJ_COPYHOME.getLastarg())){
-            if (!sr.hasPermission(ECmd.KOSTKUJ_COPYHOME.getPerm())){
-                ss.noPerm(sr);
-                return true;
-            }
-            copyhome.onCommand(sr, args);
+            this.s.saveWorld();
             return true;
         } else if (args[0].equalsIgnoreCase(ECmd.KOSTKUJ_POZEMEK.getLastarg())){
             if (!sr.hasPermission(ECmd.KOSTKUJ_POZEMEK.getPerm())){
-                ss.noPerm(sr);
+                this.ss.noPerm(sr);
                 return true;
             }
-            pozemek.onCommand(sr, args);
+            this.pozemek.onCommand(sr, args);
             return true;
         } else if (args[0].equalsIgnoreCase(ECmd.KOSTKUJ_TOPTIME.getLastarg())){
             if (!sr.hasPermission(ECmd.KOSTKUJ_TOPTIME.getPerm())){
-                ss.noPerm(sr);
+                this.ss.noPerm(sr);
                 return true;
             }
-            topTime.onCommand(sr, args);
+            this.topTime.onCommand(sr, args);
             return true;
         } else if (args[0].equalsIgnoreCase(ECmd.KOSTKUJ_DEATH.getLastarg())) {
             if (!sr.hasPermission(ECmd.KOSTKUJ_DEATH.getPerm())){
-                ss.noPerm(sr);
+                this.ss.noPerm(sr);
                 return true;
             }
-            pd.onCommand(sr, args);
+            this.pd.onCommand(sr, args);
             return true;
         }  else if (args[0].equalsIgnoreCase(ECmd.KOSTKUJ_PARTICLE.getLastarg())) {
             if (!sr.hasPermission(ECmd.KOSTKUJ_PARTICLE.getPerm())){
-                ss.noPerm(sr);
+                this.ss.noPerm(sr);
                 return true;
             }
-            particle.Particle(args, sr);
+            this.particle.Particle(args, sr);
             return true;
         } else if(args[0].equalsIgnoreCase(ECmd.KOSTKUJ_DISCORDAUTH.getLastarg())){
             if (!sr.hasPermission(ECmd.KOSTKUJ_DISCORDAUTH.getPerm())){
-                ss.noPerm(sr);
+                this.ss.noPerm(sr);
                 return true;
             }
-            discordAuth.auth(sr, args);
+            this.discordAuth.auth(sr, args);
             return true;
         } else if(args[0].equalsIgnoreCase(ECmd.KOSTKUJ_COMMADBLOCKLIST.getLastarg())){
             if (!sr.hasPermission(ECmd.KOSTKUJ_COMMADBLOCKLIST.getPerm())){
-                ss.noPerm(sr);
+                this.ss.noPerm(sr);
                 return true;
             }
-            commadBlockList.onCommand(sr, args);
+            this.commadBlockList.onCommand(sr, args);
             return true;
         } else if(args[0].equalsIgnoreCase(ECmd.KOSTKUJ_WRITER.getLastarg())){
             if (!sr.hasPermission(ECmd.KOSTKUJ_WRITER.getPerm())){
-                ss.noPerm(sr);
+                this.ss.noPerm(sr);
                 return true;
             }
-            kostkjWriter.onCommand(sr, args);
+            this.kostkjWriter.onCommand(sr, args);
             return true;
         } else if(args[0].equalsIgnoreCase(ECmd.KOSTKUJ_NYNIJEAFK.getLastarg())){
             if (!sr.hasPermission(ECmd.KOSTKUJ_NYNIJEAFK.getPerm())){
-                ss.noPerm(sr);
+                this.ss.noPerm(sr);
                 return true;
             }
-            kostkuj_nyniJeAfk.onCommand(sr, args);
+            this.kostkuj_nyniJeAfk.onCommand(sr, args);
             return true;
         } else {
-            ss.info(sr, "Neplatný argument!");
+            this.ss.info(sr, "Neplatný argument!");
         }
         return false;
     }
@@ -160,9 +152,6 @@ public class Kostkuj implements CommandExecutor, TabCompleter {
             }
             if (sr.hasPermission(ECmd.KOSTKUJ_RESTART.getPerm())){
                 cmd.add(ECmd.KOSTKUJ_RESTART.getLastarg());
-            }
-            if (sr.hasPermission(ECmd.KOSTKUJ_COPYHOME.getPerm())){
-                cmd.add(ECmd.KOSTKUJ_COPYHOME.getLastarg());
             }
             if (sr.hasPermission(ECmd.KOSTKUJ_POZEMEK.getPerm())){
                 cmd.add(ECmd.KOSTKUJ_POZEMEK.getLastarg());

@@ -6,22 +6,24 @@ import org.bukkit.command.CommandSender;
 
 public class Kostkuj_Death {
 
-    SendSystem ss = new SendSystem();
-    MPlayerDeath mpd = new MPlayerDeath();
+    private SendSystem ss = new SendSystem();
+    private MPlayerDeath mpd = new MPlayerDeath();
+
+    public Kostkuj_Death() {
+    }
 
     public boolean onCommand(CommandSender sr, String[] args) {
         String user = sr.getName();
-
-        if (args.length == 2){
-            if (!sr.hasPermission("kostkuj.death.other")){
-                ss.noPerm(sr);
+        if (args.length == 2) {
+            if (!sr.hasPermission("kostkuj.death.other")) {
+                this.ss.noPerm(sr);
                 return true;
             }
+
             user = args[1];
         }
 
-        mpd.getDeath(user, sr);
-
+        this.mpd.getDeath(user, sr);
         return false;
     }
 }

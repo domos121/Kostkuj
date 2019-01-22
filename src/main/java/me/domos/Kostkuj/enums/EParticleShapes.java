@@ -39,7 +39,7 @@ public enum EParticleShapes {
     }
 
     public String getPerm(){
-        return "kostkuj.particle.set.shape." + name;
+        return "kostkuj.particle.set.shape." + this.name;
     }
 
     public static EParticleShapes getStylFromName(String name){

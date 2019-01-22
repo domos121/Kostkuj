@@ -8,7 +8,6 @@ public enum ECmd {
     KOSTKUJ_RESTART("kostkuj restart", "restart"),
     KOSTKUJ_SAVE("kostkuj save", "save"),
     KOSTKUJ_STOP("kostkuj stop", "stop"),
-    KOSTKUJ_COPYHOME("kostkuj copyhome", "copyhome"),
     KOSTKUJ_POZEMEK("kostkuj pozemek", "pozemek"),
     KOSTKUJ_TOPTIME("kostkuj toptime", "toptime"),
     KOSTKUJ_DEATH("kostkuj death", "death"),

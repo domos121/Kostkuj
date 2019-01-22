@@ -10,7 +10,6 @@ public enum  EMessages {
     USER_ISNT_REGISTERED("&cHrac &6{player} &cnení zaregistrovan. Prosím registruj se na: &6www.kostkuj.cz", "userIsntRegistred"),
     USER_ISNT_AKTIV("&cHrac &6{player} &cnemá akivovaný účet. Prosíme o aktivaci pomocí e-mailové adresy, více info na: &6www.kostkuj.cz", "userIsntAktiv"),
     USER_ERROR("&cVyskytla se chyba! Prosím kontaktuj Administrátora &cna &bDiscordu &c! více info na: &6www.kostkuj.cz", "userError"),
-
     ;
 
     private String road;

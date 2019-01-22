@@ -5,31 +5,24 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Kostkuj_Save {
 
-    SendSystem ss = new SendSystem();
+    private SendSystem ss = new SendSystem();
 
     public void saveWorld(){
 
-        List<World> world = Bukkit.getServer().getWorlds();
+        this.ss.broadCast("Ukladam mapy.");
 
-        ss.broadCast("Ukladam mapy.");
-
-        for (int i = 0; i < world.size(); i++){
-            Bukkit.getServer().getWorld(world.get(i).getName()).save();
-            Bukkit.getConsoleSender().sendMessage("Ukladam " + world.get(i).getName());
+        for (World world : Bukkit.getServer().getWorlds()){
+            Bukkit.getServer().getWorld(world.getName()).save();
+            Bukkit.getConsoleSender().sendMessage("Ukládám " + world.getName());
         }
-        List<Player> onlinePlayers = new ArrayList<Player>();
-        for (Player c : Bukkit.getOnlinePlayers()) {
-            onlinePlayers.add(c);
-            c.saveData();
-            Bukkit.getConsoleSender().sendMessage("Ulozil jsem " + c.getName());
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            p.saveData();
+            Bukkit.getConsoleSender().sendMessage("Uložil jsem " + p.getName());
         }
 
-        ss.broadCast("Mapy ulozeny.");
+        this.ss.broadCast("Mapy ulozeny.");
     }
 
 }
