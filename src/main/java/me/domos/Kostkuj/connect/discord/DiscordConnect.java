@@ -35,7 +35,7 @@ public class DiscordConnect {
 
     public static void sendMsg(String msg, Player p){
         TextChannel text = jda.getTextChannelsByName(channel, true).get(0);
-        msg = "<:green_arrow:536992110726086686>**" + p.getDisplayName() + "** » " + msg.replace("@", "[ZAVINÁČ]");
+        msg = ECfg.DISCORD_USER_NAME_PREFIX.getValue() + "**" + p.getDisplayName() + "** » " + msg.replace("@", "[ZAVINÁČ]");
         String var0 = chatTranslateToDiscord(msg);
         text.sendMessage(var0).queue();
     }

@@ -122,5 +122,6 @@ Events:
 Discord:
   BotsToken: 'GetDiscordBotsTokken'
   BotsChannel: 'GetNameDiscordChannel'
+  userNamePrefix: ''
 
 allowAutoWriter: true

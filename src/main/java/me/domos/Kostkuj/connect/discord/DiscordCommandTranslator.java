@@ -22,7 +22,7 @@ public class DiscordCommandTranslator {
 
     private void discordCommandLag(){
         DiscordConnect.sendMsg("**TPS**: " + tps.getTps());
-        DiscordConnect.sendMsg("**Online**: " + Bukkit.getServer().getOnlinePlayers().size() + "/100");
+        DiscordConnect.sendMsg("**Online**: " + Bukkit.getServer().getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers());
         String onlineplayers = "";
         for (Player p : Bukkit.getOnlinePlayers()){
             onlineplayers = onlineplayers + p.getName() + ", ";

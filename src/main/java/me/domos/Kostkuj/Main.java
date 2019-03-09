@@ -26,6 +26,7 @@ import me.domos.Kostkuj.server.listener.cmds.stavba.CMDStavba;
 import me.domos.Kostkuj.server.listener.cmds.votemute.VoteMute;
 import me.domos.Kostkuj.server.listener.events.*;
 import me.domos.Kostkuj.server.time.Timer;
+import me.domos.Kostkuj.server.votemute.FileManagerTestVersion;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
@@ -67,6 +68,7 @@ public class Main extends JavaPlugin implements Listener{
         Timer.saveMap();
         DiscordConnect.startBot();
         DiscordConnect.jda.addEventListener(new DiscordListener());
+        new FileManagerTestVersion("test", "", true);
         Bukkit.getConsoleSender().sendMessage("[Kostkuj] Is aktivated!");
     }
 

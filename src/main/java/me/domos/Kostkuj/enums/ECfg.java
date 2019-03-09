@@ -25,7 +25,8 @@ public enum ECfg {
 
 
     DISCORD_TOKEN(Main.settings.getConfig().getString("Discord.botToken")),
-    DISCORD_CHANNEL(Main.settings.getConfig().getString("Discord.botChannel"))
+    DISCORD_CHANNEL(Main.settings.getConfig().getString("Discord.botChannel")),
+    DISCORD_USER_NAME_PREFIX(Main.settings.getConfig().getString("Discord.userNamePrefix"))
     ;
 
     private String value;
