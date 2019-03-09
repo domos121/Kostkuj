@@ -88,7 +88,7 @@ public class PlayerInfo implements CommandExecutor {
             }
 
             if (op.isOnline()) {
-                Player p = (Player) sr;
+                Player p = (Player) op;
                 sr.sendMessage("§8====== §7PLAYER: §c" + p.getDisplayName() + " §8======");
                 this.jsm.jsonBcKostkuj(sr, this.cjb.clickhoverText("§7User: " + p.getDisplayName() + " §8[" + this.ss.boolenTranslateIsOnline(op.isOnline()) + "§8]", "", "§c" + p.getName() + ":\n §7Aktivace: " + acite + "\n §7UUID: §c" + p.getUniqueId().toString() + "\n §7UserID: §c" + mpi.getUser_id() + "\n §7RegisterDate: §c" + mpi.getRegisterdate() + "\n §7Op: §c" + this.ss.boolenTranslate(p.isOp()) + "\n §7Fly: §c" + this.ss.boolenTranslate(p.isFlying()) + "\n §7Gamemode: §c" + p.getGameMode(), "suggest_command", p.getUniqueId().toString()));
                 this.jsm.jsonBcKostkuj(sr, this.cjb.clickhoverText("§7CraftCoins: §c" + mpi.getCc(), "", "§aClick", "suggest_command", mpi.getCc() + ""));
