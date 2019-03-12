@@ -6,6 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class Pravidla implements CommandExecutor {
 
@@ -17,6 +18,11 @@ public class Pravidla implements CommandExecutor {
         if (!sr.hasPermission("kostkuj.pravidla")){
             ss.noPerm(sr);
             return false;
+        }
+
+        if (!(sr instanceof Player)){
+            ss.noPlayer(sr);
+            return true;
         }
 
         if(args.length == 0) {

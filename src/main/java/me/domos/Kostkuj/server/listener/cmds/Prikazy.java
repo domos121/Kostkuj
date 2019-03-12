@@ -6,6 +6,7 @@ import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class Prikazy implements CommandExecutor {
 
@@ -17,6 +18,11 @@ public class Prikazy implements CommandExecutor {
         if (!sr.hasPermission("kostkuj.prikazy")){
             ss.noPerm(sr);
             return false;
+        }
+
+        if (!(sr instanceof Player)){
+            ss.noPlayer(sr);
+            return true;
         }
 
         // pokud je příkaz pouze /cmd stane se mg.getGr...

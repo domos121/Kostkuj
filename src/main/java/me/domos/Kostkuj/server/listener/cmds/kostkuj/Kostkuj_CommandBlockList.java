@@ -16,6 +16,11 @@ public class Kostkuj_CommandBlockList {
 
     public boolean onCommand(CommandSender sr, String[] args) {
 
+        if (!(sr instanceof Player)){
+            ss.noPlayer(sr);
+            return true;
+        }
+
             Event_Chat.commandBlockCheck = true;
             ss.info(sr, "Hledám CommandBlocky.");
             commandTimer(15*20, (Player) sr);

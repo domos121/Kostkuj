@@ -7,6 +7,7 @@ public enum  EMessages {
 
     PLUGIN_PREFIX("§8[§cKostkuj§8]:§7 ", "pluginPrefix"),
     NO_PERMISSIONS("Nemáš patřičná oprávnění.", "noPermissions"),
+    NO_PLAYER("Tento příkaz může použít pouze hráč.", "noPlayer"),
     USER_ISNT_REGISTERED("&cHrac &6{player} &cnení zaregistrovan. Prosím registruj se na: &6www.kostkuj.cz", "userIsntRegistred"),
     USER_ISNT_AKTIV("&cHrac &6{player} &cnemá akivovaný účet. Prosíme o aktivaci pomocí e-mailové adresy, více info na: &6www.kostkuj.cz", "userIsntAktiv"),
     USER_ERROR("&cVyskytla se chyba! Prosím kontaktuj Administrátora &cna &bDiscordu &c! více info na: &6www.kostkuj.cz", "userError"),

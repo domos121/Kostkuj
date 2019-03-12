@@ -4,6 +4,7 @@ import me.domos.Kostkuj.server.chat.SendSystem;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class CMDProject implements CommandExecutor {
 
@@ -19,6 +20,11 @@ public class CMDProject implements CommandExecutor {
         if (!sr.hasPermission("kostkuj.project")){
            ss.noPerm(sr);
            return true;
+        }
+
+        if (!(sr instanceof Player)){
+            ss.noPlayer(sr);
+            return true;
         }
 
         if (args.length == 0){

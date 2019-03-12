@@ -46,6 +46,10 @@ public class Kostkuj implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sr, Command cmd, String commandLabel, String[] args) {
         if(args.length == 0){
+            if (!(sr instanceof Player)) {
+                ss.noPlayer(sr);
+                return true;
+            }
             this.mb.menu(sr, Main, "Main");
             return true;
         }

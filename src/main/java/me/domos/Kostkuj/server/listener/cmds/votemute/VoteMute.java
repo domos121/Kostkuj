@@ -34,8 +34,8 @@ public class VoteMute implements CommandExecutor {
             return true;
         }
 
-        if (!(sr instanceof Player)) {
-            ss.info(sr, "Console nesmí použít tento příkaz.");
+        if (!(sr instanceof Player)){
+            ss.noPlayer(sr);
             return true;
         }
 

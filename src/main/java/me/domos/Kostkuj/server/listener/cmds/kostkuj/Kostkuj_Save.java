@@ -11,7 +11,7 @@ public class Kostkuj_Save {
 
     public void saveWorld(){
 
-        this.ss.broadCast("Ukladam mapy.");
+        this.ss.broadCast("Ukládám mapy.");
 
         for (World world : Bukkit.getServer().getWorlds()){
             Bukkit.getServer().getWorld(world.getName()).save();
@@ -22,7 +22,7 @@ public class Kostkuj_Save {
             Bukkit.getConsoleSender().sendMessage("Uložil jsem " + p.getName());
         }
 
-        this.ss.broadCast("Mapy ulozeny.");
+        this.ss.broadCast("Mapy uloženy.");
     }
 
 }

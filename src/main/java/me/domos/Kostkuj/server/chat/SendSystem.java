@@ -20,6 +20,10 @@ public class SendSystem {
         p.sendMessage(EMessages.PLUGIN_PREFIX.getValue() + EMessages.NO_PERMISSIONS.getValue());
     }
 
+    public void noPlayer(CommandSender sr){
+        sr.sendMessage(EMessages.PLUGIN_PREFIX.getValue() + EMessages.NO_PLAYER.getValue());
+    }
+
     public void noPerm(CommandSender sr){
         sr.sendMessage(EMessages.PLUGIN_PREFIX.getValue() + EMessages.NO_PERMISSIONS.getValue());
     }

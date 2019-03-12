@@ -18,6 +18,10 @@ public class Kostkuj_DiscordAuth {
     private FileManager fm = FileManager.getInstance();
 
     public void auth(CommandSender sr, String[] args) {
+        if (!(sr instanceof Player)){
+            ss.noPlayer(sr);
+            return;
+        }
         Player p = Bukkit.getPlayer(sr.getName());
         KPlayer kp = KPlayer.getPlayer(p);
         String userAuthKey;

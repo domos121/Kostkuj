@@ -2,6 +2,7 @@ package me.domos.Kostkuj.server.listener.cmds.kostkuj;
 
 import me.domos.Kostkuj.server.chat.SendSystem;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 public class Kostkuj_Particle {
 
@@ -15,6 +16,11 @@ public class Kostkuj_Particle {
     }
 
     public void Particle(String[] args, CommandSender sr) {
+        if (!(sr instanceof Player)){
+            ss.noPlayer(sr);
+            return;
+        }
+
         if (args.length == 1) {
             this.ss.info(sr, "Vyber úkon.");
         } else {

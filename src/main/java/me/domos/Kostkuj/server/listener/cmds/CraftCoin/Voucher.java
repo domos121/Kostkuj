@@ -6,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,11 @@ public class Voucher implements CommandExecutor, TabCompleter {
     public boolean onCommand(CommandSender sr, Command cmd, String s, String[] args) {
         if (!sr.hasPermission(ECmd.VOUCHER.getPerm())){
             ss.noPerm(sr);
+            return true;
+        }
+
+        if (!(sr instanceof Player)){
+            ss.noPlayer(sr);
             return true;
         }
 

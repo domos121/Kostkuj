@@ -40,6 +40,11 @@ public class PlayerInfo implements CommandExecutor {
     }
 
     public boolean onCommand(CommandSender sr, Command cmd, String commandLabel, String[] args) {
+        if (!(sr instanceof Player)){
+            ss.noPlayer(sr);
+            return true;
+        }
+
         if (!sr.hasPermission(ECmd.PLAYERINFO.getPerm())) {
             this.ss.noPerm(sr);
             return true;
