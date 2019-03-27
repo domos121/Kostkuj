@@ -12,6 +12,8 @@ public enum EDiscordCmd {
     LAG("/lag", EKostkujRole.Moderator, new DiscordCommandLag(),"Informace o stavu serveru."),
     LIST("/list", EKostkujRole.Moderator, new DiscordCommandList(),"Seznam hráčů na serveru."),
     BROADCAST("/bc", EKostkujRole.Hl_Moderator, new DiscordCommandBroadCast(),"Globální správa do chatu."),
+    SAVE("/save", EKostkujRole.Moderator, new DiscordCommandSave(), "Uloží mapy."),
+    RESTART("/restart", EKostkujRole.Hl_Moderator, new DiscordCommandRestart(), "Restart serveru."),
     TREST("/trest", EKostkujRole.Moderator, new DiscordCommandTrest(), "Banovací systém.");
 
     private String command;
@@ -51,7 +53,13 @@ public enum EDiscordCmd {
             DiscordConnect.sendPrivateMsg("**Pro příkaz '__" + args[0] + "__' nemáš dostaztečná oprávnění!**", event.getAuthor());
             return false;
         }
-        return this.discordCommand.onCommand(args, event, role);
+        String[] args2 = new String[args.length-1];
+        for (int i = 0; args.length > i; i++){
+            if (i != 0){
+                args2[i-1] = args[i];
+            }
+        }
+        return this.discordCommand.onCommand(args2, event, role);
     }
 
     public String getCommand(){
