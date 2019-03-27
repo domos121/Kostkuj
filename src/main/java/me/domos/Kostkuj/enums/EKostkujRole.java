@@ -1,12 +1,15 @@
 package me.domos.Kostkuj.enums;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public enum EKostkujRole {
 
-    Admin("admin", "§f[§4Admin§f] §4", "§c"),
-    Poradce("poradce", "§f[§1Poradce§f] §1", "§3"),
+    Nikdo("", "", ""),
     Moderator("moderator", "§f[§2MOD§f] §2", "§a"),
     Hl_Moderator("hl. moderator", "§f[§aHL.MOD§f] §a", "§2"),
-    Nikdo("", "", "");
+    Poradce("poradce", "§f[§1Poradce§f] §1", "§3"),
+    Admin("admin", "§f[§4Admin§f] §4", "§c");
 
     private String name;
     private String prefix;
@@ -39,4 +42,17 @@ public enum EKostkujRole {
         return EKostkujRole.Nikdo;
     }
 
+    public static List<EKostkujRole> getAccesRoleList(EKostkujRole userRole){
+        List<EKostkujRole> accesRole = new ArrayList<>();
+        for (EKostkujRole role : EKostkujRole.values()){
+            if (role != userRole){
+                accesRole.add(role);
+            } else {
+                accesRole.add(role);
+                break;
+            }
+        }
+
+        return accesRole;
+    }
 }

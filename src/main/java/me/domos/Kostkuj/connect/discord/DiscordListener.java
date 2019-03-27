@@ -1,6 +1,7 @@
 package me.domos.Kostkuj.connect.discord;
 
 import me.domos.Kostkuj.FileManager;
+import me.domos.Kostkuj.connect.discord.commands.DiscordCommandRouter;
 import me.domos.Kostkuj.enums.EKostkujRole;
 import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.events.message.guild.GuildMessageReceivedEvent;
@@ -12,20 +13,29 @@ import java.util.UUID;
 
 public class DiscordListener extends ListenerAdapter {
 
-    DiscordCommandTranslator dct = new DiscordCommandTranslator();
-    FileManager fm = FileManager.getInstance();
+    private DiscordCommandRouter dct = new DiscordCommandRouter();
+    private FileManager fm = FileManager.getInstance();
 
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
+        //  SKONTROLUJE SPRÁVNEJ CHANNEL;
         if (!event.getChannel().getName().equalsIgnoreCase(DiscordConnect.channel))return;
+        //  POKUD TO JE BOT/FAKE STORNUJE;
         if (event.getAuthor().isBot() || event.getAuthor().isFake() || event.isWebhookMessage()) return;
+        // NAČTE PROMĚNNÉ;
+        UUID uuid;
+        Member member = event.getMember();
+        String roleFromDiscord = member.getRoles().get(0).getName();
+        EKostkujRole role = EKostkujRole.getRoleFromName(roleFromDiscord);
         String[] args = event.getMessage().getContentRaw().split("");
+
+        //  KONTROLA ZDA SE JEDNA O OVĚŘOVACÍ PŘÍKAZ;
         if (event.getMessage().getContentRaw().equalsIgnoreCase("/auth")){
             DiscordAuth.discordIdList.add(event.getAuthor().getId());
             DiscordConnect.sendPrivateMsg("**SEND COMMAND IN GAME**: /k discordauth uid:" + event.getAuthor().getId(), event.getAuthor());
             return;
         }
-        UUID uuid;
+        // KONTROLA ZDA JE ÚČET OVĚŘEN ZE HRY;
         try {
             uuid = UUID.fromString(fm.getDiscordAuth().getString("DiscordAuth." + event.getAuthor().getId()));
         } catch (NullPointerException e){
@@ -34,16 +44,17 @@ public class DiscordListener extends ListenerAdapter {
             DiscordConnect.sendPrivateMsg("**SEND COMMAND IN GAME**: /k discordauth uid:" + event.getAuthor().getId(), event.getAuthor());
             return;
         }
+
         OfflinePlayer op = Bukkit.getOfflinePlayer(uuid);
+
+        //  KONTROLA ZDA SE JEDNÁ O PŘÍKAZ.
         if (args[0].equalsIgnoreCase("/")) {
-            dct.CommandTranslate(event.getMessage().getContentRaw().split(" "), event.getAuthor());
+            dct.CommandRoute(event.getMessage().getContentRaw().split(" "), event, role);
             return;
         }
 
-        Member member = event.getMember();
         if (member.getRoles().get(0) == null) return;
-        String roleFromDiscord = member.getRoles().get(0).getName();
-        EKostkujRole role = EKostkujRole.getRoleFromName(roleFromDiscord);
+
         Bukkit.getServer().broadcastMessage("<[§dDC§7§f] " + role.getPrefix() + op.getName() + "§f> " + role.getChatcolor() + event.getMessage().getContentRaw().replace("&",  "§"));
     }
 

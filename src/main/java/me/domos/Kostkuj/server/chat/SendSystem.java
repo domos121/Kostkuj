@@ -30,7 +30,7 @@ public class SendSystem {
 
     public void broadCast(String msg){
         Bukkit.getServer().broadcastMessage(EMessages.PLUGIN_PREFIX.getValue() + msg.replace("&", "§"));
-        DiscordConnect.sendMsg("```fix\n" + EMessages.PLUGIN_PREFIX.getValue() + msg + "\n```");
+        DiscordConnect.sendOrangeMsg(EMessages.PLUGIN_PREFIX.getValue() + msg);
     }
 
     public void use(CommandSender sr, String msg){

@@ -118,6 +118,14 @@ public class Time {
         return outtime;
     }
 
+    public String getDayTime(){
+        Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat parsetime = new SimpleDateFormat("[HH:mm:ss]");
+        parsetime.setTimeZone(TimeZone.getTimeZone("Europe/Prague"));
+        String outtime = parsetime.format(date);
+        return outtime;
+    }
+
     public String minuteToTime(int minute){
         int hour = 0;
         int day = 0;

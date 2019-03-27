@@ -49,7 +49,7 @@ public class EventPlayerJoin {
         }
         if(!p.hasPermission(ECmd.KOSTKUJ_JOIN_SLIENT.getPerm())) {
             mjb.setInfoPlayerConnection(uuid);
-            DiscordConnect.sendMsg("```css\n" + p.getName() + " joined the game!\n```");
+            DiscordConnect.sendYellowMsg(p.getName() + " joined the game!");
         }
         p.setGameMode(GameMode.SURVIVAL);
     }

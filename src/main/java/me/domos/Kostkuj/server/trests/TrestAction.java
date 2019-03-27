@@ -1,21 +1,18 @@
 package me.domos.Kostkuj.server.trests;
 
 import me.domos.Kostkuj.connect.MySQL.trests.MTrestsIP;
-import me.domos.Kostkuj.server.chat.SendSystem;
 import me.domos.Kostkuj.server.time.Time;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.command.CommandSender;
 
 
 public class TrestAction {
 
-    private SendSystem ss = new SendSystem();
     private Time t = new Time();
     private MTrestsIP mti = new MTrestsIP();
 
-    public int action(CommandSender sr, String action){
+    public int action(String action){
         switch (action.toLowerCase()){
             case "ban":
                 return 1;
@@ -33,14 +30,14 @@ public class TrestAction {
         return -1;
     }
 
-    public String user_uuid(CommandSender sr, String user){
+    public String user_uuid(String user){
 
         OfflinePlayer op = Bukkit.getServer().getOfflinePlayer(user);
 
         return op.getUniqueId().toString();
     }
 
-    public int[] rule(CommandSender sr, String rule){
+    public int[] rule(String rule){
         String[] srule = rule.split(",");
         int[] error = {-1};
         int[] irule = new int[srule.length];
@@ -57,7 +54,7 @@ public class TrestAction {
         return error;
     }
         //15d
-    public long time(CommandSender sr, String time){
+    public long time(String time){
         try {
             String jedn = "";
             String scurent = "";
@@ -78,7 +75,7 @@ public class TrestAction {
         }
     }
 
-    public int ipid(CommandSender sr, String ipid, String user, int action){
+    public int ipid(String ipid, String user, int action){
         if(action == 5 || action == 6){
             return 0;
         }

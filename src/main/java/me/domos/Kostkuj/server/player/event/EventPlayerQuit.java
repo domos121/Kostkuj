@@ -23,7 +23,7 @@ public class EventPlayerQuit {
         String hash = iph.hashIp(ip);
         // set time ip logout
         if(!p.hasPermission(ECmd.KOSTKUJ_JOIN_SLIENT.getPerm())) {
-            DiscordConnect.sendMsg("```css\n" + p.getName() + " left the game!\n```");
+            DiscordConnect.sendYellowMsg(p.getName() + " left the game!");
         }
         mti.updateIPLogout(uuid, hash);
     }

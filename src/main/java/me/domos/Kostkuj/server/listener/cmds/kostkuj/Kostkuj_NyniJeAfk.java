@@ -32,7 +32,7 @@ public class Kostkuj_NyniJeAfk {
                 Location l = p.getLocation();
                 String json = this.cjb.vetaClickHoverText("§6Hráč §r", "", p.getDisplayName(), "", p.getDisplayName() + "§7:\nLokace: §cx:" + l.getBlockX() + ", y:" + l.getBlockY() + ", z:" + l.getBlockZ() + "\n§7Svet: §c" + l.getWorld().getName().trim(), "suggest_command", "/tppos " + l.getBlockX() + " " + l.getBlockY() + " " + l.getBlockZ() + " " + l.getWorld().getName().trim(), "§6 je afk více než 30 min.", "");
                 this.jbc.jsonBcKostkuj(json, ECmd.KOSTKUJ_NYNIJEAFK.getPerm());
-                DiscordConnect.sendMsg("```fix\nHráč " + p.getDisplayName() + " je afk více než 30 min.\n```");
+                DiscordConnect.sendOrangeMsg("Hráč " + p.getDisplayName() + " je afk více než 30 min.");
             }
         }
     }

@@ -1,4 +1,5 @@
 package me.domos.Kostkuj.server.time;
+
 import me.domos.Kostkuj.Main;
 import me.domos.Kostkuj.connect.MySQL.commandRequest.MRequestGet;
 import me.domos.Kostkuj.enums.ECfg;

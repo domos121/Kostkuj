@@ -1,5 +1,6 @@
 package me.domos.Kostkuj.server.listener.cmds.domos;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,6 +13,7 @@ public class Domos implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender sr, Command cmd, String s, String[] args) {
+        Bukkit.getServer().broadcastMessage("Curak");
         return true;
     }
 

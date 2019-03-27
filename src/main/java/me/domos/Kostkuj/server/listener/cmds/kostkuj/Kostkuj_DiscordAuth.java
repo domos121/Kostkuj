@@ -35,7 +35,7 @@ public class Kostkuj_DiscordAuth {
             User dcuser = DiscordConnect.jda.getUserById(userAuthKey);
             DiscordAuth.discordIdList.remove(userAuthKey);
             userAuthKey = this.keyGenerator.getSerialKey(30);
-            kp.setDiscordUserKey(userAuthKey);
+            kp.setDiscordUserKey(dcuser.getId());
             kp.setAuthKey(userAuthKey);
             DiscordConnect.sendPrivateMsg("**SEND COMMAND IN GAME**: /k discordauth key:" + userAuthKey, dcuser);
             this.ss.info(sr, "Byl vám odeslán autorizační klíč na discord.");

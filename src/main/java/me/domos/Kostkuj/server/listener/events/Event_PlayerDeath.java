@@ -16,6 +16,6 @@ public class Event_PlayerDeath implements Listener {
         Double position_z = e.getEntity().getLocation().getZ();
         String world  = e.getEntity().getLocation().getWorld().getName();
         mpd.setDeath(e.getEntity().getName(), e.getDeathMessage(), position_x, position_y, position_z, world);
-        DiscordConnect.sendMsg("```fix\n" + e.getDeathMessage() +  "\n```");
+        DiscordConnect.sendOrangeMsg(e.getDeathMessage());
     }
 }

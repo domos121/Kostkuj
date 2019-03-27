@@ -16,7 +16,7 @@ public class Event_PlayerJoinEvent implements Listener {
         playerjoin.playerIpEdit(pj.getPlayer());
         lpCoreUser.core(pj.getPlayer());
         if (!pj.getPlayer().hasPlayedBefore()){
-            DiscordConnect.sendMsg("```fix\n" + pj.getPlayer().getDisplayName() + " se poprvé připojil do hry." + "\n```");
+            DiscordConnect.sendOrangeMsg(pj.getPlayer().getDisplayName() + " se poprvé připojil do hry.");
         }
     }
 }

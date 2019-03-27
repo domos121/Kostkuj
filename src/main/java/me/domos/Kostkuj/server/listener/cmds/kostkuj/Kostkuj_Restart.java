@@ -44,6 +44,7 @@ public class Kostkuj_Restart {
             BossBar bar = Bukkit.createBossBar(ChatColor.GOLD + "Server bude restartovan za: " + ChatColor.GREEN + args[1] + ChatColor.GOLD + "s.", BarColor.PINK, BarStyle.SOLID, new BarFlag[0]);
             this.rts.setStop(false);
             this.t.serverRestart(Integer.parseInt(args[1]), bar, "restartovan");
+            ss.broadCast(ChatColor.GOLD + "Server bude " + "restartovan" + " za: " + ChatColor.GREEN + args[1] + ChatColor.GOLD + "s.");
             return false;
         } else {
             this.ss.info(sr, "Muzes zadat interval od 15s - 2h");

@@ -49,6 +49,7 @@ public class Main extends JavaPlugin implements Listener{
     private PluginManager pm = Bukkit.getPluginManager();
     private AutoMessager am = new AutoMessager();
     public static Plugin plugin = null;
+    public static Long startTime;
 
     @Override
     public void onEnable(){
@@ -70,6 +71,7 @@ public class Main extends JavaPlugin implements Listener{
         DiscordConnect.jda.addEventListener(new DiscordListener());
         new FileManagerTestVersion("test", "", true);
         Bukkit.getConsoleSender().sendMessage("[Kostkuj] Is aktivated!");
+        startTime = System.currentTimeMillis();
     }
 
     public void onDisable() {
