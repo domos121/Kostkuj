@@ -15,6 +15,4 @@ public class DiscordAuth {
             }
             return false;
         }
-
-
 }

@@ -13,13 +13,15 @@ public class DiscordCommandList implements IDiscordCommand{
 
     @Override
     public boolean onCommand(String[] args, GuildMessageReceivedEvent event, EKostkujRole role) {
-        DiscordConnect.sendMsg("**TPS**: " + tps.getTps());
-        DiscordConnect.sendMsg("**Online**: " + Bukkit.getServer().getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers());
-        String onlineplayers = "";
+        StringBuilder msg = new StringBuilder();
+        msg.append("===== **LIST** =====\n");
+        msg.append("**TPS**: " + tps.getTps() + "\n");
+        msg.append("**Online**: " + Bukkit.getServer().getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers() + "\n");
+        msg.append("**OnlinePlayers**: ");
         for (Player p : Bukkit.getOnlinePlayers()){
-            onlineplayers = onlineplayers + p.getName() + ", ";
+            msg.append(p.getName() + ", ");
         }
-        DiscordConnect.sendMsg("**OnlinePlayers**: " + onlineplayers);
+        DiscordConnect.sendMsg(msg.toString());
         return false;
     }
 }

@@ -2,8 +2,10 @@ package me.domos.Kostkuj.server.player.event;
 
 import me.domos.Kostkuj.connect.MySQL.MySQL;
 import me.domos.Kostkuj.connect.MySQL.MySQLlistener.MySQLget;
+import me.domos.Kostkuj.enums.ECfg;
 import me.domos.Kostkuj.enums.EMessages;
 import me.domos.Kostkuj.server.chat.BanManager.PreJoinBanKick;
+import me.domos.Kostkuj.server.player.KPlayerSettings;
 import me.domos.Kostkuj.server.player.ipmanager.IpHasher;
 import me.domos.Kostkuj.server.trests.GetTrest;
 import org.bukkit.ChatColor;
@@ -15,16 +17,21 @@ public class EventPlayerPreLogin {
     MySQLget mysqlget = new MySQLget();
     PreJoinBanKick preJoinBanKick = new PreJoinBanKick();
     MySQL mysql = new MySQL();
+    KPlayerSettings kps = new KPlayerSettings();
 
     @Deprecated
     public void checkEmailConfirm(PlayerPreLoginEvent a) {
-
-
         String uuid = a.getUniqueId().toString();
         String name = a.getName().trim();
         int hodnota = mysqlget.getConfirm(uuid);
         PlayerPreLoginEvent.Result result = KICK_OTHER;
         a.setResult(KICK_OTHER);
+        KPlayerSettings.LoginTimeBuffer loginBuffer = kps.getLoginTime(a.getName());
+        if (loginBuffer.isAcces()){
+            a.disallow(result, "");
+            a.setKickMessage("§6Login time out §a" + (ECfg.LOGIN_TIME_OUT_TIME.getInt()-loginBuffer.getTime()) + "s§6!");
+            return;
+        }
         if (hodnota == -1) {
             a.disallow(result, "");
             a.setKickMessage(ChatColor.translateAlternateColorCodes('&', EMessages.USER_ISNT_REGISTERED.getValue().replace("{player}", name)));

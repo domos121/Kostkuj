@@ -8,13 +8,14 @@ import java.util.List;
 
 public enum EDiscordCmd {
 
-    HELP("/help", EKostkujRole.Moderator, new DiscorfCommandHelp(),"Zobrazí seznam dostupných příkazů."),
+    HELP("/help", EKostkujRole.Moderator, new DiscordCommandHelp(),"Zobrazí seznam dostupných příkazů."),
     LAG("/lag", EKostkujRole.Moderator, new DiscordCommandLag(),"Informace o stavu serveru."),
     LIST("/list", EKostkujRole.Moderator, new DiscordCommandList(),"Seznam hráčů na serveru."),
     BROADCAST("/bc", EKostkujRole.Hl_Moderator, new DiscordCommandBroadCast(),"Globální správa do chatu."),
     SAVE("/save", EKostkujRole.Moderator, new DiscordCommandSave(), "Uloží mapy."),
     RESTART("/restart", EKostkujRole.Hl_Moderator, new DiscordCommandRestart(), "Restart serveru."),
-    TREST("/trest", EKostkujRole.Moderator, new DiscordCommandTrest(), "Banovací systém.");
+    TREST("/trest", EKostkujRole.Moderator, new DiscordCommandTrest(), "Banovací systém."),
+    UNBAN("/unban", EKostkujRole.Moderator, new DiscordCommandUnban(), "Odbanuje hráče.");
 
     private String command;
     private EKostkujRole minRole;

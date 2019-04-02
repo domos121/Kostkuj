@@ -41,7 +41,7 @@ public class Event_Chat implements Listener {
                 e.setCancelled(true);
             }
         }
-        DiscordConnect.sendMsg(e.getMessage(), e.getPlayer());
+        DiscordConnect.sendPlayerMsg(e.getMessage(), e.getPlayer());
     }
 
     @EventHandler

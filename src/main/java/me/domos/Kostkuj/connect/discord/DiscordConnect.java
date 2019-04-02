@@ -37,11 +37,15 @@ public class DiscordConnect {
         sendMsg(":octagonal_sign:**Kostkuj** *se odpojil*.");
     }
 
-    public static void sendMsg(String msg, Player p){
+    public static void sendMsg(String msg){
         TextChannel text = jda.getTextChannelsByName(channel, true).get(0);
-        msg = time.getDayTime() + " " + ECfg.DISCORD_USER_NAME_PREFIX.getValue() + "**" + p.getDisplayName() + "** » " + msg.replace("@", "[ZAVINÁČ]");
         String var0 = chatTranslateToDiscord(msg);
         text.sendMessage(var0).queue();
+    }
+
+    public static void sendPlayerMsg(String msg, Player p){
+        msg = time.getDayTime() + " " + ECfg.DISCORD_USER_NAME_PREFIX.getValue() + "**" + p.getDisplayName() + "** » " + msg.replace("@", "[ZAVINÁČ]");
+        sendMsg(msg);
     }
 
     public static void sendInfoMsg(String msg){
@@ -56,11 +60,6 @@ public class DiscordConnect {
         DiscordConnect.sendMsg("```css\n" + time.getDayTime() + " " + msg +  "\n```");
     }
 
-    public static void sendMsg(String msg){
-        TextChannel text = jda.getTextChannelsByName(channel, true).get(0);
-        String var0 = chatTranslateToDiscord(msg);
-        text.sendMessage(var0).queue();
-    }
 
     public static void sendPrivateMsg(String msg, User user){
         user.openPrivateChannel().queue((channel) -> {
