@@ -8,6 +8,7 @@ import java.util.List;
 
 public enum ECfg {
 
+    //MYSQL
     MYSQL_PREFIX(Main.settings.getConfig().getString("MySQL.prefix")),
     MYSQL_HOST(Main.settings.getConfig().getString("MySQL.host")),
     MYSQL_PORT(Main.settings.getConfig().getString("MySQL.port")),
@@ -23,10 +24,13 @@ public enum ECfg {
     MYSQL_TABLE_PLACE(MYSQL_PREFIX.getValue() + Main.settings.getConfig().getString("MySQL.tables.tableplace.tablename")),
     MYSQL_TABLE_BREAK(MYSQL_PREFIX.getValue() + Main.settings.getConfig().getString("MySQL.tables.tablebreak.tablename")),
 
-
+    //DISCORD
     DISCORD_TOKEN(Main.settings.getConfig().getString("Discord.botToken")),
     DISCORD_CHANNEL(Main.settings.getConfig().getString("Discord.botChannel")),
-    DISCORD_USER_NAME_PREFIX(Main.settings.getConfig().getString("Discord.userNamePrefix"))
+    DISCORD_USER_NAME_PREFIX(Main.settings.getConfig().getString("Discord.userNamePrefix")),
+
+    //settings
+    LOGIN_TIME_OUT_TIME("30")
     ;
 
     private String value;
@@ -37,6 +41,10 @@ public enum ECfg {
 
     public String getValue() {
         return value;
+    }
+
+    public int getInt(){
+        return Integer.parseInt(value);
     }
 
     public static int getTimeForAutoMessages() {

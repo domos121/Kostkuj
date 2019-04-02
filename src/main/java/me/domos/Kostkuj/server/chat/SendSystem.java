@@ -37,6 +37,10 @@ public class SendSystem {
         sr.sendMessage(EMessages.PLUGIN_PREFIX.getValue() + "Use: /" + msg + ".");
     }
 
+    public static void domosTest(String msg){
+        Bukkit.getServer().getConsoleSender().sendMessage("§6[DOMOS TEST]: §c" + msg);
+    }
+
     public String boolenTranslate(boolean ss){
         if (ss){
             return "§aAno";

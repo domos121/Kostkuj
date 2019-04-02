@@ -12,6 +12,7 @@ public class Event_PlayerPreLoginEvent implements Listener {
     public void onPlayerJoin(PlayerPreLoginEvent a) {
         EventPlayerPreLogin prelogin = new EventPlayerPreLogin();
         prelogin.checkEmailConfirm(a);
+
     }
 }
 
