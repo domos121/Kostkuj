@@ -1,12 +1,12 @@
-name: Kostkuj
-main: me.domos.Kostkuj.Main
+name: kostkuj
+main: me.domos.kostkuj.Main
 version: 2.0
 api-version: 1.13
 depend: [Vault]
 
 commands:
   kostkuj:
-    description: Menu Kostkuj
+    description: Menu kostkuj
     aliases: [k]
   unban:
     description: /unban <name>
@@ -19,7 +19,7 @@ commands:
   test:
     description: /test <time>
   playerinfo:
-    description: /playerinfo <name>
+    description: /playerInfo <name>
     aliases: [pi, playeri]
   pravidla:
     description: /pravidla <name>

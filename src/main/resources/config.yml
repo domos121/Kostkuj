@@ -69,9 +69,9 @@ itemlistchacker:
 ## Čas opakovaného odesílání v s.
 repeteTime: 1200
 
-## JSON syntaxe!
+## json syntaxe!
 ## #info# [Info]
-## #prefix# [Kostkuj]
+## #prefix# [kostkuj]
 autoMessage:
  - '{"text":"test","color":"red"}'
  - '{"text":"test2","color":"blue"}'

@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
 Class-Path: libs.JDA-3.8.1_448-withDependencies.jar
-Main-Class: me.domos.Kostkuj.Main
+Main-Class: me.domos.kostkuj.Main
 
