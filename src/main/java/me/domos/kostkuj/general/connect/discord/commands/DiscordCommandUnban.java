@@ -21,7 +21,6 @@ public class DiscordCommandUnban implements IDiscordCommand{
     private MTrests mt = new MTrests();
     private JsonBroadCast jbc = new JsonBroadCast();
     private CustomJsonBuilder cjb = new CustomJsonBuilder();
-    private ConfigManager fm = ConfigManager.getInstance();
 
     @Override
     public boolean onCommand(String[] args, GuildMessageReceivedEvent event, EKostkujRole role) {
@@ -87,7 +86,7 @@ public class DiscordCommandUnban implements IDiscordCommand{
             reason = reason + args[i] + " ";
         }
 
-        UUID uuid = UUID.fromString(fm.getDiscordAuth().getString("DiscordAuth." + event.getAuthor().getId()));
+        UUID uuid = UUID.fromString(ConfigManager.DISCORD.getConfig().getString("DiscordAuth." + event.getAuthor().getId()));
         OfflinePlayer op = Bukkit.getOfflinePlayer(uuid);
 
         String hover = "§7Unban:\n§7ID: §c#" + idtrestu + "\n§7Admin: §c" + op.getName() + "\n§7Duvod: §c" + reason + "";

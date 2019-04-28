@@ -31,14 +31,14 @@ public enum ECmd {
     STAVBA_CLOSE("stavba close","close"),
     STAVBA_VOTE("stavba","stavba"),
     // PLAYERINFO
-    PLAYERINFO("playerInfo", "playerInfo"),
+    PLAYERINFO("playerinfo", "playerinfo"),
     PLAYERINFO_OTHER("", ""),
     // VOTEMUTE
-    VOTEMUTE("voteMute", "voteMute"),
-    VOTEMUTE_CREATE("voteMute <username>", ""),
-    VOTEMUTE_VOTE("voteMute", "voteMute"),
-    VOTEMUTE_GET("voteMute get:", "get:"),
-    VOTEMUTE_HELP("voteMute help:", "help:"),
+    VOTEMUTE("votemute", "voteMute"),
+    VOTEMUTE_CREATE("votemute <username>", ""),
+    VOTEMUTE_VOTE("votemute", "voteMute"),
+    VOTEMUTE_GET("votemute get:", "get:"),
+    VOTEMUTE_HELP("votemute help:", "help:"),
     // VOUCHER
     VOUCHER("voucher", "voucher"),
     VOUCHER_GET("voucher get", "get"),
@@ -46,6 +46,19 @@ public enum ECmd {
     VOUCHER_USE("voucher use", "use"),
     VOUCHER_HELP("voucher help", "help"),
     VOUCHER_GIFT("voucher gift", "gift"),
+    // CRATE
+    CRATE("crate", "crate"),
+    CRATE_RELOAD("crate reload", "reload"),
+    CRATE_HELP("crate help", "help"),
+    CRATE_CREATEKEY("crate createkey", "createkey"),
+    // VOTE
+    VOTE("vote", "vote"),
+    VOTE_TEST("vote test", "test"),
+    VOTE_HELP("vote help", "help"),
+    VOTE_SKLAD("vote sklad", "sklad"),
+    VOTE_SKLAD_OTHER("vote sklad [user]", "sklad"),
+    // USECODE
+    USECODE("usecode", "usecode"),
     // DOMOS
     DOMOS("domos", "domos");
 

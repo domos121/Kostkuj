@@ -1,6 +1,5 @@
 package me.domos.kostkuj.general.fileManager;
 
-import me.domos.kostkuj.Main;
 import org.bukkit.Bukkit;
 
 public enum  EMessages {
@@ -20,7 +19,7 @@ public enum  EMessages {
     EMessages(String defaultValue, String road){
         this.defaultValue = defaultValue;
         this.road = road;
-        this.value = Main.settings.getMessages().getString(road);
+        this.value = ConfigManager.MESSAGES.getConfig().getString(road);
     }
 
     public String getRoad(){
@@ -30,9 +29,9 @@ public enum  EMessages {
     public static void checkConfig(){
         Bukkit.getConsoleSender().sendMessage(EMessages.PLUGIN_PREFIX.defaultValue + "§6Checking message.yml");
         for (EMessages msg : EMessages.values()){
-            if (!Main.settings.getMessages().isSet(msg.getRoad())){
-                Main.settings.getMessages().set(msg.getRoad(), msg.getDefaultValue());
-                Main.settings.saveMessages();
+            if (!ConfigManager.MESSAGES.getConfig().isSet(msg.getRoad())){
+                ConfigManager.MESSAGES.getConfig().set(msg.getRoad(), msg.getDefaultValue());
+                ConfigManager.MESSAGES.saveConfig();
                 Bukkit.getConsoleSender().sendMessage(EMessages.PLUGIN_PREFIX.defaultValue + "Add " + msg.getRoad() + " to message.yml");
             }
         }

@@ -1,9 +1,13 @@
 package me.domos.kostkuj.bukkit.listeners.events;
 
 import me.domos.kostkuj.bukkit.chat.SendSystem;
+import me.domos.kostkuj.bukkit.player.inventory.InvSklad;
 import me.domos.kostkuj.bukkit.time.Time;
 import me.domos.kostkuj.general.connect.mysql.projekty.MySQLGetProjekt;
+import me.domos.kostkuj.general.fileManager.ConfigCrates;
+import me.domos.kostkuj.general.fileManager.ConfigSklad;
 import me.domos.kostkuj.general.forumProjects.ProjektSettings;
+import me.domos.kostkuj.models.coreModel.CratesOpen;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Chest;
@@ -27,6 +31,11 @@ public class Event_HandBreak implements Listener {
 
     @EventHandler
     public void onPlayerHandBreak(PlayerInteractEvent e){
+        compileChest(e);
+        checkOpenCrates(e);
+    }
+
+    private void compileChest(PlayerInteractEvent e){
         if (ProjektSettings.isCompileCommand(e.getPlayer().getName())) {
             if ((e.getAction() == Action.LEFT_CLICK_BLOCK) || (e.getAction() == Action.RIGHT_CLICK_BLOCK)) {
                 if (e.getClickedBlock().getType() == Material.CHEST) {
@@ -77,4 +86,34 @@ public class Event_HandBreak implements Listener {
         }
     }
 
+    public void checkOpenCrates(PlayerInteractEvent e){
+        ConfigCrates cCrates = ConfigCrates.getInstance();
+        ConfigSklad cSklad = new ConfigSklad();
+        InvSklad invSklad = new InvSklad();
+        CratesOpen cco = new CratesOpen();
+        if (e.getAction() == Action.RIGHT_CLICK_BLOCK && e.getClickedBlock().getType() == Material.CHEST) {
+            List<String> chests = cCrates.getChests();
+            List<String> sklad = cSklad.getSklads();
+
+            Location l = e.getClickedBlock().getLocation();
+
+            String chestlocation = l.getBlockX() + "," + l.getBlockY() + "," + l.getBlockZ() + "," + l.getWorld().getName().trim();
+
+            for (int i = 0; chests.size() > i; i++) {
+                if (chestlocation.equalsIgnoreCase(chests.get(i))) {
+                    e.setCancelled(true);
+                    cco.openCrates(e, chests.get(i));
+                    break;
+                }
+            }
+
+            for (int i = 0; sklad.size() > i; i++) {
+                if (chestlocation.equalsIgnoreCase(sklad.get(i))) {
+                    e.setCancelled(true);
+                    invSklad.openSklad(e.getPlayer());
+                    break;
+                }
+            }
+        }
+    }
 }

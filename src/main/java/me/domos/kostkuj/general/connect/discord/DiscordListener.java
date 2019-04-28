@@ -14,7 +14,6 @@ import java.util.UUID;
 public class DiscordListener extends ListenerAdapter {
 
     private DiscordCommandRouter dct = new DiscordCommandRouter();
-    private ConfigManager fm = ConfigManager.getInstance();
 
     @Override
     public void onGuildMessageReceived(GuildMessageReceivedEvent event) {
@@ -37,7 +36,7 @@ public class DiscordListener extends ListenerAdapter {
         }
         // KONTROLA ZDA JE ÚČET OVĚŘEN ZE HRY;
         try {
-            uuid = UUID.fromString(fm.getDiscordAuth().getString("DiscordAuth." + event.getAuthor().getId()));
+            uuid = UUID.fromString(ConfigManager.DISCORD.getConfig().getString("DiscordAuth." + event.getAuthor().getId()));
         } catch (NullPointerException e){
             DiscordConnect.sendPrivateMsg("Tvůj účet není aktivován pro odesílání zpráv z discordu. Pro aktivaci se drž pokynů.", event.getAuthor());
             DiscordAuth.discordIdList.add(event.getAuthor().getId());

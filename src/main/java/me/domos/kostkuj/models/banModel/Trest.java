@@ -32,7 +32,6 @@ public class Trest {
     private SendBanMessage sbm = new SendBanMessage();
     private MCraftCoins mcc = new MCraftCoins();
     private SendSystem ss = new SendSystem();
-    private ConfigManager fm = ConfigManager.getInstance();
 
     @Deprecated
     public Trest(CommandSender sr, String[] args) {
@@ -334,7 +333,7 @@ public class Trest {
             fbanneduuid = null;
         }
 
-        UUID uuid = UUID.fromString(fm.getDiscordAuth().getString("DiscordAuth." + event.getAuthor().getId()));
+        UUID uuid = UUID.fromString(ConfigManager.DISCORD.getConfig().getString("DiscordAuth." + event.getAuthor().getId()));
         OfflinePlayer op = Bukkit.getOfflinePlayer(uuid);
 
         Timestamp expir = Time.getTimeSec(ftime);

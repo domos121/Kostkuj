@@ -69,7 +69,7 @@ public class CMDStavba implements CommandExecutor, TabCompleter {
                 ss.noPerm(sr);
                 return true;
             }
-        } else if (args[0].equalsIgnoreCase("vote")){
+        } else if (args[0].equalsIgnoreCase("voteModel")){
             if (!sr.hasPermission(ECmd.STAVBA_VOTE.getPerm())){
                 ss.noPerm(sr);
                 return true;
@@ -93,7 +93,7 @@ public class CMDStavba implements CommandExecutor, TabCompleter {
         cmd.add("add");
         cmd.add("start");
         cmd.add("close");
-        cmd.add("vote");
+        cmd.add("voteModel");
         cmd.add("get");
         if (args[0] == null){
             tab = cmd;

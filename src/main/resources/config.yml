@@ -125,3 +125,25 @@ Discord:
   userNamePrefix: ''
 
 allowAutoWriter: true
+
+premium:
+  DVIP:
+  - 'lp user [player] parent add dozvip'
+  - 'lp user [player] promote home'
+  - 'lp user [player] promote residence'
+  VIP:
+  - 'lp user [player] parent tempadd [time]'
+  HOME:
+  - 'lp user [player] promote home'
+  RESIDENCE:
+  - 'lp user [player] promote resience'
+  VANOCE_VLOCKA:
+  - 'lp user [player] meta addtempsuffix 10 ❄ [time]s'
+  VANOCE_SNEHULAK:
+  - 'lp user [player] meta addtempsuffix 10 ☃ [time]s'
+
+vote-items:
+- '1,§7Vote§aKey%45'
+- '1,§5Epic§aKey%10'
+- '2,§7Vote§aKey%45'
+- '1,§bOcean§aKey%60'

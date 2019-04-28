@@ -36,7 +36,7 @@ public class Kostkuj implements CommandExecutor, TabCompleter {
     private String[][] Main = {
             {"Help", "Potrebujes pomoct s prikazama?", "kostkuj.menu", "/cmd", "run_command"},
             {"Pravidla", "Potřebuješ zjistit pravidla?", "kostkuj.menu", "/pravidla", "run_command"},
-            {"HLASUJ!", "Odkaz na web s hlasovanim", "kostkuj.menu", "https://czech-craft.eu/vote?id=12614&user=#name#", "open_url"},
+            {"HLASUJ!", "Odkaz na web s hlasovanim", "kostkuj.menu", "https://czech-craft.eu/voteModel?id=12614&user=#name#", "open_url"},
             {"Web", "Odkaz na nas web\\n§6www.kostkuj.cz", "kostkuj.menu", "http://www.kostkuj.cz/", "open_url"},
             {"Forum", "Odkaz na nas web\\n§6www.kostkuj.cz/forum", "kostkuj.menu", "http://www.kostkuj.cz/forum", "open_url"},
             {"Shop", "Odkaz na nas web\\n§6www.kostkuj.cz/shop", "kostkuj.menu", "http://www.kostkuj.cz/shop", "open_url"},

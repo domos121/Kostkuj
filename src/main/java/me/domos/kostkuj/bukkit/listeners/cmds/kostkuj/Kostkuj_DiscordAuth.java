@@ -15,7 +15,6 @@ public class Kostkuj_DiscordAuth {
 
     private KeyGenerator keyGenerator = new KeyGenerator();
     private SendSystem ss = new SendSystem();
-    private ConfigManager fm = ConfigManager.getInstance();
 
     public void auth(CommandSender sr, String[] args) {
         if (!(sr instanceof Player)){
@@ -56,8 +55,8 @@ public class Kostkuj_DiscordAuth {
             }
 
             this.ss.info(sr, "Discord authorizován. Nyní můžeš odesílazt zprávy z Discordu.");
-            this.fm.getDiscordAuth().set("DiscordAuth." + kp.getDiscordUserKey(), p.getUniqueId().toString());
-            this.fm.saveDiscordAuth();
+            ConfigManager.DISCORD.getConfig().set("DiscordAuth." + kp.getDiscordUserKey(), p.getUniqueId().toString());
+            ConfigManager.DISCORD.saveConfig();
         }
 
     }

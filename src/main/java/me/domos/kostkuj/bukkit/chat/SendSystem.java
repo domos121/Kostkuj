@@ -1,6 +1,7 @@
 package me.domos.kostkuj.bukkit.chat;
 
 import me.domos.kostkuj.general.connect.discord.DiscordConnect;
+import me.domos.kostkuj.general.fileManager.ECfg;
 import me.domos.kostkuj.general.fileManager.EMessages;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -39,6 +40,12 @@ public class SendSystem {
 
     public static void domosTest(String msg){
         Bukkit.getServer().getConsoleSender().sendMessage("§6[DOMOS TEST]: §c" + msg);
+    }
+
+    public void debugMsg(String msg){
+        if (ECfg.isAllowdebugMod()) {
+            Bukkit.getServer().getConsoleSender().sendMessage("§8[§cKostkujDEBUG§8]:§a " + msg);
+        }
     }
 
     public String boolenTranslate(boolean ss){

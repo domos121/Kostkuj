@@ -1,5 +1,11 @@
 package me.domos.kostkuj.bukkit.items;
 
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
+import org.bukkit.inventory.meta.ItemMeta;
+
 import java.util.ArrayList;
 
 public class EnchBuilder {
@@ -26,5 +32,25 @@ public class EnchBuilder {
             poleEnch[i] = arrayEnch.get(i).split(",");
         }
         return poleEnch;
+    }
+
+    public ItemMeta iEnch(String ench){
+        String[][] enchants = ench(ench);
+        ItemStack item = new ItemStack(Material.DIAMOND);
+        ItemMeta meta = item.getItemMeta();
+        for (int i = 0; enchants.length > i; i++) {
+            meta.addEnchant(Enchantment.getByName(enchants[i][0]), Integer.parseInt(enchants[i][1]), true);
+        }
+        return meta;
+    }
+
+    public EnchantmentStorageMeta bEnch(String ench){
+        String[][] enchants = ench(ench);
+        ItemStack item = new ItemStack(Material.ENCHANTED_BOOK);
+        EnchantmentStorageMeta meta = (EnchantmentStorageMeta) item.getItemMeta();
+        for (int i = 0; enchants.length > i; i++) {
+            meta.addStoredEnchant(Enchantment.getByName(enchants[i][0]), Integer.parseInt(enchants[i][1]), true);
+        }
+        return meta;
     }
 }

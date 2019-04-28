@@ -1,5 +1,6 @@
 package me.domos.kostkuj.general.connect.mysql;
 
+import me.domos.kostkuj.bukkit.chat.SendSystem;
 import me.domos.kostkuj.general.fileManager.ECfg;
 import me.domos.kostkuj.general.fileManager.EMessages;
 import net.md_5.bungee.api.ChatColor;
@@ -23,8 +24,9 @@ public class MySQL {
         if (!isConected()) {
             try {
                 con = DriverManager.getConnection(ECfg.MYSQL_URL.getValue(), ECfg.MYSQL_USERNAME.getValue(), ECfg.MYSQL_PASSWORD.getValue());
-                Bukkit.getConsoleSender().sendMessage(EMessages.PLUGIN_PREFIX.getValue() + ChatColor.GREEN + "mysql PRIPOJENA!!");
+                Bukkit.getConsoleSender().sendMessage(EMessages.PLUGIN_PREFIX.getValue() + ChatColor.GREEN + "MYSQL PRIPOJENA!!");
             } catch (SQLException e) {
+                new SendSystem().debugMsg(ECfg.MYSQL_PREFIX.getValue() + " " + ECfg.MYSQL_USERNAME.getValue() + " " + ECfg.MYSQL_PASSWORD.getValue());
                 Bukkit.getConsoleSender().sendMessage(EMessages.PLUGIN_PREFIX.getValue() + ChatColor.RED + e.getMessage());
             }
         }

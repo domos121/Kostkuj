@@ -39,6 +39,9 @@ commands:
   votemute:
   stavba:
   domos:
+  usecode:
+  vote:
+  crate:
 permissions:
   kostkuj.pravidla:
     default: OP

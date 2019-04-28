@@ -9,6 +9,7 @@ import me.domos.kostkuj.bukkit.listeners.cmds.Prikazy;
 import me.domos.kostkuj.bukkit.listeners.cmds.bans.CMDTrest;
 import me.domos.kostkuj.bukkit.listeners.cmds.bans.UnBan;
 import me.domos.kostkuj.bukkit.listeners.cmds.craftCoin.Voucher;
+import me.domos.kostkuj.bukkit.listeners.cmds.crates.Crates;
 import me.domos.kostkuj.bukkit.listeners.cmds.domos.Domos;
 import me.domos.kostkuj.bukkit.listeners.cmds.kostkuj.Kostkuj;
 import me.domos.kostkuj.bukkit.listeners.cmds.kostkuj.Kostkuj_Save;
@@ -16,7 +17,9 @@ import me.domos.kostkuj.bukkit.listeners.cmds.playerInfo.CheckBan;
 import me.domos.kostkuj.bukkit.listeners.cmds.playerInfo.CheckIp;
 import me.domos.kostkuj.bukkit.listeners.cmds.playerInfo.PlayerInfo;
 import me.domos.kostkuj.bukkit.listeners.cmds.projekty.CMDProject;
+import me.domos.kostkuj.bukkit.listeners.cmds.shop.Usecode;
 import me.domos.kostkuj.bukkit.listeners.cmds.stavba.CMDStavba;
+import me.domos.kostkuj.bukkit.listeners.cmds.vote.Vote;
 import me.domos.kostkuj.bukkit.listeners.cmds.votemute.VoteMute;
 import me.domos.kostkuj.bukkit.listeners.events.*;
 import me.domos.kostkuj.bukkit.time.Timer;
@@ -24,8 +27,7 @@ import me.domos.kostkuj.general.connect.discord.DiscordConnect;
 import me.domos.kostkuj.general.connect.discord.DiscordListener;
 import me.domos.kostkuj.general.connect.mysql.MySQL;
 import me.domos.kostkuj.general.connect.mysql.mysqlListener.MySQLfunction;
-import me.domos.kostkuj.general.fileManager.ConfigManager;
-import me.domos.kostkuj.general.fileManager.EMessages;
+import me.domos.kostkuj.general.fileManager.*;
 import net.milkbowl.vault.chat.Chat;
 import net.milkbowl.vault.permission.Permission;
 import org.bukkit.Bukkit;
@@ -40,8 +42,10 @@ import java.util.Random;
 
 public class Main extends JavaPlugin implements Listener{
 
+    private ConfigCrates configCrates = ConfigCrates.getInstance();
+    private ConfigVote configVote = ConfigVote.getInstance();
+    private ConfigSklad configSklad = new ConfigSklad();
     public static Random random = new Random();
-    public static ConfigManager settings = ConfigManager.getInstance();
     public static Chat chat = null;
     public static Permission perm = null;
     public static final SendSystem ss = new SendSystem();
@@ -55,8 +59,11 @@ public class Main extends JavaPlugin implements Listener{
         setupChat();
         setupPermission();
         plugin = this;
-        settings.setup(this);
+        ConfigManager.setup(this);
         EMessages.checkConfig();
+        configCrates.setCfg();
+        configSklad.setCfg();
+        configVote.setCfg();
         MySQL mysql = new MySQL();
         MySQLfunction mysqlfunction = new MySQLfunction();
         commandLoad();
@@ -81,7 +88,6 @@ public class Main extends JavaPlugin implements Listener{
         getCommand("kostkuj").setExecutor(new Kostkuj());
         getCommand("unban").setExecutor(new UnBan());
         getCommand("checkip").setExecutor(new CheckIp());
-        getCommand("test").setExecutor(new Test());
         getCommand(ECmd.PLAYERINFO.getCmd()).setExecutor(new PlayerInfo());
         getCommand("broadcast").setExecutor(new BroadCast());
         getCommand("pravidla").setExecutor(new Pravidla());
@@ -94,6 +100,10 @@ public class Main extends JavaPlugin implements Listener{
         getCommand(ECmd.STAVBA.getCmd()).setExecutor(new CMDStavba());
         getCommand(ECmd.STAVBA.getCmd()).setTabCompleter(new CMDStavba());
         getCommand(ECmd.DOMOS.getCmd()).setExecutor(new Domos());
+        getCommand(ECmd.USECODE.getCmd()).setExecutor(new Usecode());
+        getCommand(ECmd.VOTE.getCmd()).setExecutor(new Vote());
+        getCommand(ECmd.CRATE.getCmd()).setExecutor(new Crates());
+        getCommand(ECmd.CRATE.getCmd()).setTabCompleter(new Crates());
     }
 
     private void eventLoad(){
@@ -106,6 +116,9 @@ public class Main extends JavaPlugin implements Listener{
         pm.registerEvents(new Event_Chat(), this);
         pm.registerEvents(new Event_PingServer(), this);
         pm.registerEvents(new Event_HandBreak(), this);
+        pm.registerEvents(new Event_Vote(),this);
+        pm.registerEvents(new Event_InventoryClick(), this);
+        pm.registerEvents(new Event_OpenCloseInventory(), this);
     }
 
     private boolean setupChat() {
@@ -123,7 +136,4 @@ public class Main extends JavaPlugin implements Listener{
         }
         return (perm != null);
     }
-
-
-
 }

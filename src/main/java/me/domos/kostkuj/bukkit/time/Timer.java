@@ -54,7 +54,7 @@ public class Timer {
                     // pokud se některej rovná s aktuálním
                     if (currenttime[i][0].equals(unixtime)) {
                         if(currenttime[i][1].equalsIgnoreCase("msg")){
-                            jbc.jsonBcKostkuj("[\n" + "  {\n" + "    \"text\":\"#info#\"\n" + "  },\n" + "  {\n" + "    \"text\":\" Nyni muzes hlasovat: \",\n" + "    \"color\":\"gray\"\n" + "  },\n" + "  {\n" + "    \"text\":\"➥ZDE.\",\n" + "    \"color\":\"dark_gray\",\n" + "    \"clickEvent\":{\n" + "      \"action\": \"open_url\",\n" + "      \"value\":\"https://czech-craft.eu/vote?id=12614&user=#sr#\"\n" + "    },\n" + "    \"hoverEvent\":{\n" + "      \"action\": \"show_text\",\n" + "      \"value\":\"§cNastala suda hodina:\\n§aNyni muzes hlasovat.\\nKliknutím se dostanes na svuj odkaz.\"\n" + "    }\n" + "  }\n" + "]");
+                            jbc.jsonBcKostkuj("[\n" + "  {\n" + "    \"text\":\"#info#\"\n" + "  },\n" + "  {\n" + "    \"text\":\" Nyni muzes hlasovat: \",\n" + "    \"color\":\"gray\"\n" + "  },\n" + "  {\n" + "    \"text\":\"➥ZDE.\",\n" + "    \"color\":\"dark_gray\",\n" + "    \"clickEvent\":{\n" + "      \"action\": \"open_url\",\n" + "      \"value\":\"https://czech-craft.eu/voteModel?id=12614&user=#sr#\"\n" + "    },\n" + "    \"hoverEvent\":{\n" + "      \"action\": \"show_text\",\n" + "      \"value\":\"§cNastala suda hodina:\\n§aNyni muzes hlasovat.\\nKliknutím se dostanes na svuj odkaz.\"\n" + "    }\n" + "  }\n" + "]");
                         }
                         // ukončí cykl
                         break;
