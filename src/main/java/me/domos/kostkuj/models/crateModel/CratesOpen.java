@@ -1,4 +1,4 @@
-package me.domos.kostkuj.models.coreModel;
+package me.domos.kostkuj.models.crateModel;
 
 import me.domos.kostkuj.Main;
 import me.domos.kostkuj.bukkit.chat.SendSystem;

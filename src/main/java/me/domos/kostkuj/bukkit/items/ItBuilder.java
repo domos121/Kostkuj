@@ -47,7 +47,9 @@ public class ItBuilder {
 
     public ItemStack setName(ItemStack itemStack, String name){
         ItemStack ite = itemStack;
-        ite.getItemMeta().setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
+        ItemMeta im = ite.getItemMeta();
+        im.setDisplayName(ChatColor.translateAlternateColorCodes('&', name));
+        ite.setItemMeta(im);
         return ite;
     }
 

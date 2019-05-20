@@ -17,11 +17,11 @@ public class Event_InventoryClick implements Listener {
     @EventHandler
     public void click(InventoryClickEvent e){
         if (e.getClickedInventory() != null) {
-            if (e.getClickedInventory().getName().contains("_GiftChest")) {
+            Player ps = (Player) e.getWhoClicked();
+            if (ps.getOpenInventory().getTitle().contains("_GiftChest")) {
                 e.setCancelled(true);
             }
         }
-
 
         Player p = (Player)e.getWhoClicked();
         Inventory open = e.getClickedInventory();

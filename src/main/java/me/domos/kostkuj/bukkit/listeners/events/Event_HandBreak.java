@@ -7,7 +7,7 @@ import me.domos.kostkuj.general.connect.mysql.projekty.MySQLGetProjekt;
 import me.domos.kostkuj.general.fileManager.ConfigCrates;
 import me.domos.kostkuj.general.fileManager.ConfigSklad;
 import me.domos.kostkuj.general.forumProjects.ProjektSettings;
-import me.domos.kostkuj.models.coreModel.CratesOpen;
+import me.domos.kostkuj.models.crateModel.CratesOpen;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Chest;

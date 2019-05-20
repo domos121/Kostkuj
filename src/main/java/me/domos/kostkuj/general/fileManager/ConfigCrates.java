@@ -25,25 +25,25 @@ public class ConfigCrates {
 
 
     public void setCfg() {
-        List<String> get_chests = new ArrayList<String>();
-        List<String> get_keys = new ArrayList<String>();
-        HashMap<String, String> get_mapKeys = new HashMap();
-        HashMap<String, String> get_mapName = new HashMap();
-        HashMap<String, List<?>> get_mapItems = new HashMap();
-        for (String key : ConfigManager.CRATES.getConfig().getConfigurationSection("chests").getKeys(false)) {
-            Bukkit.getServer().getConsoleSender().sendMessage("§4" + key);
-            get_keys.add(ConfigManager.CRATES.getConfig().getString("chests." + key + ".key"));
-            get_chests.add(key);
-            get_mapKeys.put(key, ConfigManager.CRATES.getConfig().getString("chests." + key + ".key"));
-            get_mapName.put(key, ConfigManager.CRATES.getConfig().getString("chests." + key + ".name"));
-            get_mapItems.put(key, ConfigManager.CRATES.getConfig().getList("chests." + key + ".items"));
-        }
+            List<String> get_chests = new ArrayList<String>();
+            List<String> get_keys = new ArrayList<String>();
+            HashMap<String, String> get_mapKeys = new HashMap();
+            HashMap<String, String> get_mapName = new HashMap();
+            HashMap<String, List<?>> get_mapItems = new HashMap();
+            for (String key : ConfigManager.CRATES.getConfig().getConfigurationSection("chests").getKeys(false)) {
+                Bukkit.getServer().getConsoleSender().sendMessage("§4" + key);
+                get_keys.add(ConfigManager.CRATES.getConfig().getString("chests." + key + ".key"));
+                get_chests.add(key);
+                get_mapKeys.put(key, ConfigManager.CRATES.getConfig().getString("chests." + key + ".key"));
+                get_mapName.put(key, ConfigManager.CRATES.getConfig().getString("chests." + key + ".name"));
+                get_mapItems.put(key, ConfigManager.CRATES.getConfig().getList("chests." + key + ".items"));
+            }
 
-        ConfigCrates.key = get_keys;
-        ConfigCrates.chests = get_chests;
-        ConfigCrates.mapKeys = get_mapKeys;
-        ConfigCrates.mapName = get_mapName;
-        ConfigCrates.mapItems = get_mapItems;
+            ConfigCrates.key = get_keys;
+            ConfigCrates.chests = get_chests;
+            ConfigCrates.mapKeys = get_mapKeys;
+            ConfigCrates.mapName = get_mapName;
+            ConfigCrates.mapItems = get_mapItems;
     }
 
 
