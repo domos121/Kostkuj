@@ -24,7 +24,7 @@ public class DiscordCommandLag implements IDiscordCommand{
         msg.append("**TPS**: " + tps.getTps() + "\n");
         msg.append("**Uptime:** " + time.minuteToTime((int)(System.currentTimeMillis()- Main.startTime)/50) + "\n");
         for (World world : Bukkit.getWorlds()){
-            msg.append("**" + world.getName() + "** (Entity: " + world.getEntityCount() + " ,Chunks: " + world.getChunkCount() + " ,Players: " + world.getPlayerCount() + ")\n");
+            msg.append("**" + world.getName() + "** (Entity: " + world.getEntities().size() + " ,Chunks: " + world.getLoadedChunks().length + " ,Players: " + world.getPlayers().size() + ")\n");
         }
 
         msg.append("**RAM**: " + (runtime.totalMemory() - runtime.freeMemory()) / mb + "/" + runtime.maxMemory() / mb + "\n");

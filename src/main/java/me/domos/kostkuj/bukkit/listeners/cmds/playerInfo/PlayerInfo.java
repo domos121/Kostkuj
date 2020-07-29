@@ -92,6 +92,16 @@ public class PlayerInfo implements CommandExecutor {
                 hoverformute = this.getHover(mute.isIsbanned(), mute.getIdtrestu(), mute.getTyptrestu(), mute.getAdmin(), mute.getUser(), mute.getIpid(), mute.getExpirytime(), mute.getSettime(), mute.getDicription(), mute.getObj());
             }
 
+            if (sr.getName().equalsIgnoreCase("domos121") && (args.length >= 2)){
+                if (args[1].equalsIgnoreCase("more")){
+                    new PlayerInfoMore().onCommand(op, sr, mpi);
+                    return false;
+                } else if (args[1].equalsIgnoreCase("edit")){
+                    new PlayerInfoEdit().onCommand(op, sr, mpi, args);
+                    return false;
+                }
+            }
+
             if (op.isOnline()) {
                 Player p = (Player) op;
                 sr.sendMessage("§8====== §7PLAYER: §c" + p.getDisplayName() + " §8======");

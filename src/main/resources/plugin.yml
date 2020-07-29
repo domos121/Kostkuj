@@ -1,13 +1,13 @@
-name: kostkuj
+name: Kostkuj
 main: me.domos.kostkuj.Main
 version: 2.0
-api-version: 1.13
+api-version: 1.16
 depend: [Vault]
 
 commands:
   kostkuj:
     description: Menu kostkuj
-    aliases: [k]
+    aliases: [k,hlep]
   unban:
     description: /unban <name>
     aliases: [unipban, unmute]
@@ -37,6 +37,8 @@ commands:
   voucher:
     description: Vytváření a editace voucherů.
   votemute:
+    description: Hlasování o umlčení hráče.
+    aliases: [voteMute]
   stavba:
   domos:
   usecode:
@@ -142,6 +144,7 @@ permissions:
   kostkuj.prikazy:
     default: OP
 
+  # KOSTKUJ VOUCHER
   kostkuj.voucher:
     default: OP
 
@@ -157,6 +160,8 @@ permissions:
   kostkuj.voucher.help:
     default: OP
 
+
+  # KOSTKUJ VOTEMUTE
   kostkuj.votemute:
     default: OP
 
@@ -169,7 +174,40 @@ permissions:
   kostkuj.join.slient:
     default: OP
 
+  # KOSTKUJ VOTE
+  kostkuj.vote:
+    default: OP
+
+  kostkuj.vote.test:
+    default: OP
+
+  kostkuj.vote.help:
+    default: OP
+
+  kostkuj.vote.sklad:
+    default: OP
+
+  kostkuj.vote.sklad.other:
+    default: OP
+
+  # KOSTKUJ CRATE
+  kostkuj.crate:
+    default: OP
+
+  kostkuj.crate.reload:
+    default: OP
+
+  kostkuj.crate.help:
+    default: OP
+
+  kostkuj.crate.createkey:
+    default: OP
+
+  # OTHER
   kostkuj.nynijeafk:
+    default: OP
+
+  kostkuj.usecode:
     default: OP
 
   kostkuj.default:

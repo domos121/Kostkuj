@@ -66,15 +66,15 @@ public class Vote {
         lis.setVote(p.getName());
 
         if (p.getName().trim().equalsIgnoreCase("Menshons")){
-            p.sendMessage(EMessages.PLUGIN_PREFIX + "§dLove you to the Moon and back! MucQ!");
+            p.sendMessage(EMessages.PLUGIN_PREFIX.getValue() + "§dLove you to the Moon and back! MucQ!");
             return;
         }
 
-        p.sendMessage(EMessages.PLUGIN_PREFIX + "Dekujeme za tvou podporu!\n"
+        p.sendMessage(EMessages.PLUGIN_PREFIX.getValue() + "Dekujeme za tvou podporu!\n"
                 + "§7 Prispel si: §a" + lis.getVotes(p.getName()) + " §7hlasu.");
 
         if (!freeSlot(op)){
-            op.getPlayer().sendMessage(EMessages.PLUGIN_PREFIX + "Tvuj inventar byl plnej. Polozka se ti vlozila do skladu. Pro vybrani skladu pouzij /Vote sklad");
+            op.getPlayer().sendMessage(EMessages.PLUGIN_PREFIX.getValue() + "Tvuj inventar byl plnej. Polozka se ti vlozila do skladu. Pro vybrani skladu pouzij /Vote sklad");
             lis.setStorrage(op.getName(), ite[0] + "," + ite[1]);
             return;
         }

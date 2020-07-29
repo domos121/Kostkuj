@@ -2,7 +2,6 @@ package me.domos.kostkuj.models.craftCoinModel;
 
 import me.domos.kostkuj.general.connect.mysql.CraftCoin.MCraftCoins;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 public class CraftCoin {
 
@@ -12,7 +11,7 @@ public class CraftCoin {
         this.count = count;
     }
 
-    public CraftCoin(@NotNull Player player){
+    public CraftCoin(Player player){
         this.count = new MCraftCoins().getCC(player.getName());
     }
 

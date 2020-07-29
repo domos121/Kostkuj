@@ -17,5 +17,8 @@ public class Event_PlayerDeath implements Listener {
         String world  = e.getEntity().getLocation().getWorld().getName();
         mpd.setDeath(e.getEntity().getName(), e.getDeathMessage(), position_x, position_y, position_z, world);
         DiscordConnect.sendOrangeMsg(e.getDeathMessage());
+        /*if (e.getDeathMessage().contains("was killed by [Intentional Game Design]")){
+            e.setDeathMessage(null);
+        }*/
     }
 }

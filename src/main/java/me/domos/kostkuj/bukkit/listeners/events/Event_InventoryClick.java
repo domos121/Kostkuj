@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
 
+
 public class Event_InventoryClick implements Listener {
 
     VoteSklad v = new VoteSklad();
@@ -29,18 +30,16 @@ public class Event_InventoryClick implements Listener {
         if(open == null){
             return;
         }
-        if (e.getInventory().getName().contains("VoteGift:")){
-            if (e.getClickedInventory().getName().equalsIgnoreCase("Inventory")){
-                e.setCancelled(true);
-                return;
-            }
-            String user = open.getName().replace("§8VoteGift:§c ", "");
+        if (e.getView().getTitle().contains("VoteGift:")){
+            String user = e.getView().getTitle().replace("§8VoteGift:§c ", "");
             e.setCancelled(true);
 
             if (item == null || !item.hasItemMeta()){
                 return;
             }
+
             List<String> lore = item.getItemMeta().getLore();
+
 
             if (v.vyber(p, user,  item.getItemMeta().getDisplayName(), item.getAmount(), Integer.parseInt(lore.get(0)))){
                 open.setItem(e.getRawSlot(), null);

@@ -7,7 +7,7 @@ import me.domos.kostkuj.bukkit.listeners.ECmd;
 import me.domos.kostkuj.general.KeyGenerator;
 import me.domos.kostkuj.general.connect.mysql.CraftCoin.MVoucher;
 import me.domos.kostkuj.general.connect.mysql.mysqlListener.MySQLget;
-import net.minecraft.server.v1_13_R2.ChatClickable;
+import net.minecraft.server.v1_16_R1.ChatClickable;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.CommandSender;
 
@@ -36,6 +36,9 @@ public class Voucher_Create {
         if (!mySQLget.getBoolean("SELECT serial_key FROM shop_voucher WHERE serial_key = '" + key + "'")) {
             if (mVoucher.createVoucher(Integer.parseInt(args[1]), key, "")){
                 jsm.jsonBcKostkuj(sr,cjb.vetaClickHoverText("§7Voucher §a", "", key, "", "§6Kliknutím kod skopíruješ.", ChatClickable.EnumClickAction.SUGGEST_COMMAND.b(), key, " §7 (§a" + args[1] + "§7) byl úspěšně vytvořen.", ""));
+                if (sr.hasPermission(ECmd.VOUCHER_GIFT.getPerm())) {
+                    jsm.jsonBcKostkuj(sr, cjb.clickhoverText("§7[§aGIFT§7]", "", "§6Kliknutím vytvoříš gift knížku.", ChatClickable.EnumClickAction.RUN_COMMAND.b(), "/voucher gift " + key));
+                }
             } else {
                 ss.info(sr, "Nepodarilo se vytvorit kod, nastala chyba!");
             }

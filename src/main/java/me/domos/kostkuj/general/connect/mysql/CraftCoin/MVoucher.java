@@ -4,7 +4,7 @@ import me.domos.kostkuj.bukkit.chat.json.CustomJsonBuilder;
 import me.domos.kostkuj.bukkit.chat.json.JsonSendMessage;
 import me.domos.kostkuj.bukkit.time.Time;
 import me.domos.kostkuj.general.connect.mysql.MySQL;
-import net.minecraft.server.v1_13_R2.ChatClickable;
+import net.minecraft.server.v1_16_R1.ChatClickable;
 import org.bukkit.command.CommandSender;
 
 import java.sql.PreparedStatement;

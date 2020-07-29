@@ -10,19 +10,18 @@ public class Kostkuj_Save {
     private SendSystem ss = new SendSystem();
 
     public void saveWorld(){
+             this.ss.broadCast("Ukládám mapy.");
 
-        this.ss.broadCast("Ukládám mapy.");
+            for (World world : Bukkit.getServer().getWorlds()){
+                Bukkit.getServer().getWorld(world.getName()).save();
+                Bukkit.getConsoleSender().sendMessage("Ukládám " + world.getName());
+            }
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                p.saveData();
+                Bukkit.getConsoleSender().sendMessage("Uložil jsem " + p.getName());
+            }
 
-        for (World world : Bukkit.getServer().getWorlds()){
-            Bukkit.getServer().getWorld(world.getName()).save();
-            Bukkit.getConsoleSender().sendMessage("Ukládám " + world.getName());
-        }
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            p.saveData();
-            Bukkit.getConsoleSender().sendMessage("Uložil jsem " + p.getName());
-        }
-
-        this.ss.broadCast("Mapy uloženy.");
+            this.ss.broadCast("Mapy uloženy.");
     }
 
 }

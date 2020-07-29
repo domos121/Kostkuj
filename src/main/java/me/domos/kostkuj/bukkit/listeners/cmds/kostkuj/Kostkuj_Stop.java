@@ -22,7 +22,7 @@ public class Kostkuj_Stop {
             this.ss.info(sr, "Pristup odepren");
             return true;
         } else if (args.length == 1) {
-            this.ss.info(sr, "Use: /kostkuj stop <time(s)>|<stop>");
+            this.ss.info(sr, "Use: /kostkuj stop <time(s)>|<stop> <message:{time}>");
             return true;
         } else if (!StringUtils.isNumeric(args[1])) {
             if (args[1].equalsIgnoreCase("stop")) {
@@ -30,16 +30,27 @@ public class Kostkuj_Stop {
                 this.rts.setStop(true);
                 return true;
             } else {
-                this.ss.info(sr, "Use: /kostkuj stop <time(s)>|<stop>");
+                this.ss.info(sr, "Use: /kostkuj stop <time(s)>|<stop> <message:{time}>");
                 return true;
             }
         } else if (!this.rts.isStop()) {
             this.ss.info(sr, "Odpočet už běží.");
             return true;
         } else if (Integer.parseInt(args[1]) < 7200 && Integer.parseInt(args[1]) >= 15) {
+            if(args[2].contains("message:")){
+                String desc = "";
+                for (int i = 2;  args.length > i; i++){
+                    desc = desc + " " + args[i];
+                }
+                desc = desc.replace("message:", "");
+                ss.broadCast(desc);
+                BossBar bar = Bukkit.createBossBar(desc.replace("{time}", args[1] + "s"), BarColor.PINK, BarStyle.SOLID, new BarFlag[0]);
+                this.t.serverRestart(Integer.parseInt(args[1]), bar, desc, "vypnut");
+                return false;
+            }
             BossBar bar = Bukkit.createBossBar(ChatColor.GOLD + "Server bude vypnut za: " + ChatColor.GREEN + args[1] + ChatColor.GOLD + "s.", BarColor.PINK, BarStyle.SOLID, new BarFlag[0]);
             this.rts.setStop(false);
-            this.t.serverRestart(Integer.parseInt(args[1]), bar, "vypnut");
+            this.t.serverRestart(Integer.parseInt(args[1]), bar, ChatColor.GOLD + "Server bude vypnut za: " + ChatColor.GREEN + "{time}" + ChatColor.GOLD + "s.", "vypnut");
             return false;
         } else {
             this.ss.info(sr, "Muzes zadat interval od 15s - 2h");

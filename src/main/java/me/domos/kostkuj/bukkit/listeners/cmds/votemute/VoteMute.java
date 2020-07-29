@@ -77,14 +77,18 @@ public class VoteMute implements CommandExecutor {
                         Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "trest a:mute u:" + vmt.getUser() + " r:105 t:1h d:Schválili: " + list + " id-#" + id);
                         mvm.setUpdateVote(id);
                         vmt.setActiv(false, null, null, 0);
+                        return true;
                     }
                     return true;
                 }
+                return true;
             } else {
                 if (sr.hasPermission(ECmd.VOTEMUTE_CREATE.getPerm())){
                     ss.info(sr, "Právě neprobíhá žádné hlasování, v případě nutnosti použij /voteMute [user] pro vyvoření nového.");
+                    return true;
                 } else {
                     ss.info(sr, "Neprobíhá žádné hlasování, v případě nutnosti kontaktuj pověřenou osobu (VIP).");
+                    return true;
                 }
             }
         }

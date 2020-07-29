@@ -61,7 +61,7 @@ public enum ConfigManager {
 
     public static void setup(Plugin p){
         for (ConfigManager cfgManager : ConfigManager.values()) {
-            Bukkit.getServer().getConsoleSender().sendMessage(cfgManager.getFile().getName() + " file loaded!");
+            Bukkit.getServer().getConsoleSender().sendMessage(cfgManager.getFile().getPath() + " file loaded!");
         }
     }
 }

@@ -35,7 +35,7 @@ public class Event_HandBreak implements Listener {
         checkOpenCrates(e);
     }
 
-    private void compileChest(PlayerInteractEvent e){
+    private void compileChest(PlayerInteractEvent e) {
         if (ProjektSettings.isCompileCommand(e.getPlayer().getName())) {
             if ((e.getAction() == Action.LEFT_CLICK_BLOCK) || (e.getAction() == Action.RIGHT_CLICK_BLOCK)) {
                 if (e.getClickedBlock().getType() == Material.CHEST) {

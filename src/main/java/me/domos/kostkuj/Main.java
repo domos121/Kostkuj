@@ -72,7 +72,6 @@ public class Main extends JavaPlugin implements Listener{
         mysqlfunction.createTables();
         am.autoMessage();
         Timer.Time();
-        Timer.saveMap();
         DiscordConnect.startBot();
         DiscordConnect.jda.addEventListener(new DiscordListener());
         Bukkit.getConsoleSender().sendMessage("[kostkuj] Is aktivated!");

@@ -14,8 +14,8 @@ public class Event_OpenCloseInventory implements Listener {
 
     @EventHandler
     public void openInv(InventoryOpenEvent e){
-        if (e.getInventory().getName().contains("§6Sklad: ")){
-            String pl = e.getInventory().getName().replace("§6Sklad: §8", "");
+        if (e.getView().getTitle().contains("§6Sklad: ")){
+            String pl = e.getView().getTitle().replace("§6Sklad: §8", "");
             OfflinePlayer op = Bukkit.getOfflinePlayer(pl);
             mSklad.openSklad(op.getName());
         }
@@ -23,8 +23,8 @@ public class Event_OpenCloseInventory implements Listener {
 
     @EventHandler
     public void closeInv(InventoryCloseEvent e){
-        if (e.getInventory().getName().contains("§6Sklad: ")){
-            String pl = e.getInventory().getName().replace("§6Sklad: §8", "");
+        if (e.getView().getTitle().contains("§6Sklad: ")){
+            String pl = e.getView().getTitle().replace("§6Sklad: §8", "");
             OfflinePlayer op = Bukkit.getOfflinePlayer(pl);
             for (int i = 0; i < e.getInventory().getStorageContents().length; i++){
                 if (e.getInventory().getStorageContents()[i] != null){

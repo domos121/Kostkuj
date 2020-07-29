@@ -25,7 +25,7 @@ public class VoteSklad {
     public boolean vyber(Player p, String user, String product, int pocet, int id){
 
         if (!freeSlot(p)){
-            p.sendMessage(EMessages.PLUGIN_PREFIX + " Nemas volny slot v inventari");
+            p.sendMessage(EMessages.PLUGIN_PREFIX.getValue() + " Nemas volny slot v inventari");
             return false;
         }
 

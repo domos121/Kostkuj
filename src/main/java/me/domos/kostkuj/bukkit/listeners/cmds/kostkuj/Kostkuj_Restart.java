@@ -43,7 +43,7 @@ public class Kostkuj_Restart {
         } else if (Integer.parseInt(args[1]) < 7200 && Integer.parseInt(args[1]) >= 15) {
             BossBar bar = Bukkit.createBossBar(ChatColor.GOLD + "Server bude restartovan za: " + ChatColor.GREEN + args[1] + ChatColor.GOLD + "s.", BarColor.PINK, BarStyle.SOLID, new BarFlag[0]);
             this.rts.setStop(false);
-            this.t.serverRestart(Integer.parseInt(args[1]), bar, "restartovan");
+            this.t.serverRestart(Integer.parseInt(args[1]), bar, ChatColor.GOLD + "Server bude " + "restartovan" + " za: " + ChatColor.GREEN + "{time}" + ChatColor.GOLD + "s.", "restartovan");
             ss.broadCast(ChatColor.GOLD + "Server bude " + "restartovan" + " za: " + ChatColor.GREEN + args[1] + ChatColor.GOLD + "s.");
             return false;
         } else {

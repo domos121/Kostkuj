@@ -38,10 +38,10 @@ public class DiscordCommandRestart implements IDiscordCommand{
             DiscordConnect.sendInfoMsg("Odpočet už běží.");
             return true;
         } else if (Integer.parseInt(args[0]) < 7200 && Integer.parseInt(args[0]) >= 15) {
-            BossBar bar = Bukkit.createBossBar(ChatColor.GOLD + "Server bude restartovan za: " + ChatColor.GREEN + args[0] + ChatColor.GOLD + "s.", BarColor.PINK, BarStyle.SOLID, new BarFlag[0]);
+            BossBar bar = Bukkit.createBossBar(ChatColor.GOLD + "Server bude restartovan za: " + ChatColor.GREEN + args[1] + ChatColor.GOLD + "s.", BarColor.PINK, BarStyle.SOLID, new BarFlag[0]);
             this.rts.setStop(false);
-            this.t.serverRestart(Integer.parseInt(args[0]), bar, "restartovan");
-            ss.broadCast(ChatColor.GOLD + "Server bude " + "restartovan" + " za: " + ChatColor.GREEN + args[0] + ChatColor.GOLD + "s.");
+            this.t.serverRestart(Integer.parseInt(args[0]), bar,ChatColor.GOLD + "Server bude " + "restartovan" + " za: " + ChatColor.GREEN + "{time}" + ChatColor.GOLD + "s.","restartovan");
+            ss.broadCast(ChatColor.GOLD + "Server bude " + "restartovan" + " za: " + ChatColor.GREEN + "{time}" + ChatColor.GOLD + "s.");
             return false;
         } else {
             DiscordConnect.sendInfoMsg("Muzes zadat interval od 15s - 2h");

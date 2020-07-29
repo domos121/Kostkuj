@@ -15,6 +15,7 @@ public class MPlayerInfo {
     private MCraftCoins mCraftCoins = new MCraftCoins();
 
     private int user_id;
+    private String email;
     private int cc;
     private String registerdate;
     private String lastlogin;
@@ -51,6 +52,7 @@ public class MPlayerInfo {
                     this.posotion_y = rs.getFloat("position_y");
                     this.position_z = rs.getFloat("position_z");
                     this.world = rs.getString("world");
+                    this.email = rs.getString("email_address");
                 }
                 this.cc = mCraftCoins.getCC(user);
             } catch (SQLException e){
@@ -62,6 +64,17 @@ public class MPlayerInfo {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    public void deleteUser(String user, int user_id){
+        try {
+            PreparedStatement ps = mySQL.getStatement("DELETE FROM web_users WHERE id = ? and username = ?");
+            ps.setInt(1, user_id);
+            ps.setString(2, user);
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
         }
     }
 
@@ -100,4 +113,6 @@ public class MPlayerInfo {
     public String getWorld() {
         return world;
     }
+
+    public String getEmail() {return email; }
 }

@@ -4,26 +4,20 @@ import me.domos.kostkuj.bukkit.listeners.ECmd;
 import me.domos.kostkuj.bukkit.player.KPlayer;
 import me.domos.kostkuj.bukkit.player.ipmanager.IpHasher;
 import me.domos.kostkuj.general.connect.discord.DiscordConnect;
-import me.domos.kostkuj.general.connect.mysql.mysqlListener.MySQLis;
-import me.domos.kostkuj.general.connect.mysql.mysqlListener.MySQLset;
 import me.domos.kostkuj.general.connect.mysql.player.bans.MySQLJsonBuilderForPlayerJoin;
 import me.domos.kostkuj.general.connect.mysql.trests.MTrestsIP;
-import me.domos.kostkuj.general.forFun.particle.EParticleShapes;
 import org.bukkit.GameMode;
-import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 
 public class EventPlayerJoin {
 
-    MySQLis mysqlis = new MySQLis();
-    MySQLset mysqlset = new MySQLset();
     MySQLJsonBuilderForPlayerJoin mjb = new MySQLJsonBuilderForPlayerJoin();
     MTrestsIP mti = new MTrestsIP();
     IpHasher iph = IpHasher.getInstance();
 
 
     public void playerIpEdit(Player p){
-        KPlayer kplayer = new KPlayer(p, EParticleShapes.STOP, Particle.FLAME);
+        KPlayer kplayer = new KPlayer(p);
         KPlayer.registerPlayer(kplayer);
 
         // uuid hrace
@@ -32,7 +26,6 @@ public class EventPlayerJoin {
         String ip = p.getAddress().getAddress().toString().replace("/", "");
         // hashovana ip hrace
         String hash = iph.hashIp(ip);
-
         // pokud ip existuje
         if(mti.isIpExist(hash)){
             // pokud info o ip existuji

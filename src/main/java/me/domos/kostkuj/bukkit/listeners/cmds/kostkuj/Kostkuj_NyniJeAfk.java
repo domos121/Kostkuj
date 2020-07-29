@@ -28,9 +28,13 @@ public class Kostkuj_NyniJeAfk {
             if (!op.isOnline()) {
                 this.ss.info(sr, "Hrac neni online.");
             } else {
+                String afktime = "30";
+                if (args.length == 3){
+                    afktime = args[2];
+                }
                 Player p = (Player) op;
                 Location l = p.getLocation();
-                String json = this.cjb.vetaClickHoverText("§6Hráč §r", "", p.getDisplayName(), "", p.getDisplayName() + "§7:\nLokace: §cx:" + l.getBlockX() + ", y:" + l.getBlockY() + ", z:" + l.getBlockZ() + "\n§7Svet: §c" + l.getWorld().getName().trim(), "suggest_command", "/tppos " + l.getBlockX() + " " + l.getBlockY() + " " + l.getBlockZ() + " " + l.getWorld().getName().trim(), "§6 je afk více než 30 min.", "");
+                String json = this.cjb.vetaClickHoverText("§6Hráč §r", "", p.getDisplayName(), "", p.getDisplayName() + "§7:\nLokace: §cx:" + l.getBlockX() + ", y:" + l.getBlockY() + ", z:" + l.getBlockZ() + "\n§7Svet: §c" + l.getWorld().getName().trim(), "suggest_command", "/tppos " + l.getBlockX() + " " + l.getBlockY() + " " + l.getBlockZ() + " " + l.getWorld().getName().trim(), "§6 je afk více než " + afktime + " min.", "");
                 this.jbc.jsonBcKostkuj(json, ECmd.KOSTKUJ_NYNIJEAFK.getPerm());
                 DiscordConnect.sendOrangeMsg("Hráč " + p.getDisplayName() + " je afk více než 30 min.");
             }

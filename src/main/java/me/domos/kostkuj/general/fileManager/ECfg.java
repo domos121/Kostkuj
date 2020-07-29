@@ -12,7 +12,7 @@ public enum ECfg {
     MYSQL_HOST(ConfigManager.CONFIG.getConfig().getString("MySQL.host")),
     MYSQL_PORT(ConfigManager.CONFIG.getConfig().getString("MySQL.port")),
     MYSQL_DATABASE(ConfigManager.CONFIG.getConfig().getString("MySQL.database")),
-    MYSQL_URL("jdbc:mysql://" + MYSQL_HOST.getValue() + ":" + MYSQL_PORT.getValue() + "/" + MYSQL_DATABASE.getValue() + "?autoReconnect=true"),
+    MYSQL_URL("jdbc:mysql://" + MYSQL_HOST.getValue() + ":" + MYSQL_PORT.getValue() + "/" + MYSQL_DATABASE.getValue() + "?autoReconnect=true&characterEncoding=utf8"),
     MYSQL_USERNAME(ConfigManager.CONFIG.getConfig().getString("MySQL.username")),
     MYSQL_PASSWORD(ConfigManager.CONFIG.getConfig().getString("MySQL.password")),
     MYSQL_TABLE_USERS(ConfigManager.CONFIG.getConfig().getString("MySQL.tables.tableusers.tablename")),

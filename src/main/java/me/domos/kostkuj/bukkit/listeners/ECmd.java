@@ -12,11 +12,6 @@ public enum ECmd {
     KOSTKUJ_TOPTIME("kostkuj toptime", "toptime"),
     KOSTKUJ_DEATH("kostkuj death", "death"),
     KOSTKUJ_DEATH_OTHER("kostkuj death <user>", "death"),
-    KOSTKUJ_PARTICLE("kostkuj particle", "particle"),
-    KOSTKUJ_PARTICLE_STOP("kostkuj particle stop", "stop"),
-    KOSTKUJ_PARTICLE_START("kostkuj particle start", "start"),
-    KOSTKUJ_PARTICLE_SHAPE("kostkuj particle shape", "shape"),
-    KOSTKUJ_PARTICLE_TYP("kostkuj particle typ", "typ"),
     KOSTKUJ_DISCORDAUTH("kostkuj discordauth", "discordauth"),
     KOSTKUJ_COMMADBLOCKLIST("kostkuj commandblocklist", "commandblocklist"),
     KOSTKUJ_WRITER("kostkuj writer", "writer"),
@@ -33,6 +28,7 @@ public enum ECmd {
     // PLAYERINFO
     PLAYERINFO("playerinfo", "playerinfo"),
     PLAYERINFO_OTHER("", ""),
+    PLAYERINFO_MORE("playerinfo more", ""),
     // VOTEMUTE
     VOTEMUTE("votemute", "voteMute"),
     VOTEMUTE_CREATE("votemute <username>", ""),
@@ -51,6 +47,7 @@ public enum ECmd {
     CRATE_RELOAD("crate reload", "reload"),
     CRATE_HELP("crate help", "help"),
     CRATE_CREATEKEY("crate createkey", "createkey"),
+    CRATE_EDITLOCATION("crate editlocation", "editlocation"),
     // VOTE
     VOTE("vote", "vote"),
     VOTE_TEST("vote test", "test"),

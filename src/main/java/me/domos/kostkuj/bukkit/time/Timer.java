@@ -9,7 +9,6 @@ import me.domos.kostkuj.general.connect.mysql.commandRequest.MRequestGet;
 import me.domos.kostkuj.general.fileManager.ECfg;
 import me.domos.kostkuj.general.forFun.gameEvents.writer.WriterCore;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -54,7 +53,7 @@ public class Timer {
                     // pokud se některej rovná s aktuálním
                     if (currenttime[i][0].equals(unixtime)) {
                         if(currenttime[i][1].equalsIgnoreCase("msg")){
-                            jbc.jsonBcKostkuj("[\n" + "  {\n" + "    \"text\":\"#info#\"\n" + "  },\n" + "  {\n" + "    \"text\":\" Nyni muzes hlasovat: \",\n" + "    \"color\":\"gray\"\n" + "  },\n" + "  {\n" + "    \"text\":\"➥ZDE.\",\n" + "    \"color\":\"dark_gray\",\n" + "    \"clickEvent\":{\n" + "      \"action\": \"open_url\",\n" + "      \"value\":\"https://czech-craft.eu/voteModel?id=12614&user=#sr#\"\n" + "    },\n" + "    \"hoverEvent\":{\n" + "      \"action\": \"show_text\",\n" + "      \"value\":\"§cNastala suda hodina:\\n§aNyni muzes hlasovat.\\nKliknutím se dostanes na svuj odkaz.\"\n" + "    }\n" + "  }\n" + "]");
+                            jbc.jsonBcKostkuj("[\n" + "  {\n" + "    \"text\":\"#info#\"\n" + "  },\n" + "  {\n" + "    \"text\":\" Nyni muzes hlasovat: \",\n" + "    \"color\":\"gray\"\n" + "  },\n" + "  {\n" + "    \"text\":\"➥ZDE.\",\n" + "    \"color\":\"dark_gray\",\n" + "    \"clickEvent\":{\n" + "      \"action\": \"open_url\",\n" + "      \"value\":\"https://czech-craft.eu/server/kostkuj/vote/?user=#sr#\"\n" + "    },\n" + "    \"hoverEvent\":{\n" + "      \"action\": \"show_text\",\n" + "      \"value\":\"§cNastala suda hodina:\\n§aNyni muzes hlasovat.\\nKliknutím se dostanes na svuj odkaz.\"\n" + "    }\n" + "  }\n" + "]");
                         }
                         // ukončí cykl
                         break;
@@ -64,7 +63,7 @@ public class Timer {
         }.runTaskTimer(Main.plugin, 0, 20 * 57); // plugin, Čas, nwm
     }
 
-    public void serverRestart(final int time, BossBar bar, String stav){
+    public void serverRestart(final int time, BossBar bar, String desc, String stav){
         final SendSystem ss = new SendSystem();
         final float prgs2 = time;
         new BukkitRunnable(){
@@ -79,15 +78,16 @@ public class Timer {
                     bar.addPlayer(c);
                 }
 
-                bar.setTitle(ChatColor.GOLD + "Server bude " + stav + " za: " + ChatColor.GREEN + this.prgs+ ChatColor.GOLD + "s.");
+                String sprgs = String.valueOf(this.prgs);
+                bar.setTitle(desc.replace("{time}", sprgs));
                 bar.setProgress(progres);
 
                 if (this.prgs == 30){
-                    ss.broadCast(ChatColor.GOLD + "Server bude " + stav + " za: " + ChatColor.GREEN + this.prgs + ChatColor.GOLD + "s.");
+                    ss.broadCast(desc.replace("{time}", sprgs));
                 }
 
                 if (this.prgs < 10){
-                    ss.broadCast(ChatColor.GOLD + "Server bude " + stav + " za: " + ChatColor.GREEN + this.prgs + ChatColor.GOLD + "s.");
+                    ss.broadCast(desc.replace("{time}", sprgs));
                 }
 
                 TimerSettings rts = TimerSettings.getInstance();

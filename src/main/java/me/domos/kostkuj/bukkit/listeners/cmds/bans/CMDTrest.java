@@ -2,10 +2,12 @@ package me.domos.kostkuj.bukkit.listeners.cmds.bans;
 
 import me.domos.kostkuj.bukkit.chat.SendSystem;
 import me.domos.kostkuj.models.banModel.Trest;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,7 @@ public class CMDTrest implements CommandExecutor, TabCompleter {
             return true;
         }
 
-        Trest trest = new Trest(sr, args);
+        new Trest(sr, args);
         return false;
     }
 
@@ -46,6 +48,25 @@ public class CMDTrest implements CommandExecutor, TabCompleter {
                 }
             }
         }
+        if (args[args.length-1].contains("u:")){
+            argumenty.clear();
+            for (Player  p: Bukkit.getServer().getOnlinePlayers()){
+                String editPlayer = "u:" + p.getName();
+                if (editPlayer.contains(args[args.length-1])){
+                    argumenty.add(editPlayer);
+                }
+            }
+            return argumenty;
+        }
+        if (args[args.length-1].contains("a:")){
+            argumenty.clear();
+            for (String  akce: this.akce()){
+                if (akce.contains(args[args.length-1])){
+                    argumenty.add(akce);
+                }
+            }
+            return argumenty;
+        }
         return argumenty;
     }
 
@@ -57,6 +78,17 @@ public class CMDTrest implements CommandExecutor, TabCompleter {
         argumenty.add("d:");
         argumenty.add("a:");
         return argumenty;
+    }
+
+    private List<String> akce(){
+     List<String> akce = new ArrayList<>();
+     akce.add("a:ban");
+     akce.add("a:tempban");
+     akce.add("a:ipban");
+     akce.add("a:tempipban");
+     akce.add("a:kick");
+     akce.add("a:mute");
+     return akce;
     }
 
 }

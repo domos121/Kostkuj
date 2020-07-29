@@ -14,7 +14,6 @@ import static org.bukkit.event.player.PlayerPreLoginEvent.Result.KICK_BANNED;
 public class PreJoinBanKick {
 
     private Time time = new Time();
-    private SendBanMessage sendBanMessage = new SendBanMessage();
 
     private PlayerManager pm = new PlayerManager();
 

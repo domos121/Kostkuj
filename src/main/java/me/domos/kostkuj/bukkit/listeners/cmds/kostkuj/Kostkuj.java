@@ -3,8 +3,6 @@ package me.domos.kostkuj.bukkit.listeners.cmds.kostkuj;
 import me.domos.kostkuj.bukkit.chat.SendSystem;
 import me.domos.kostkuj.bukkit.chat.menu.ChatMenuBuilder;
 import me.domos.kostkuj.bukkit.listeners.ECmd;
-import me.domos.kostkuj.general.forFun.particle.EParticle;
-import me.domos.kostkuj.general.forFun.particle.EParticleShapes;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -25,7 +23,6 @@ public class Kostkuj implements CommandExecutor, TabCompleter {
     private Kostkuj_Death pd = new Kostkuj_Death();
     private Kostkuj_Restart restart = new Kostkuj_Restart();
     private Kostkuj_Stop stop = new Kostkuj_Stop();
-    private Kostkuj_Particle particle = new Kostkuj_Particle();
     private Kostkuj_DiscordAuth discordAuth = new Kostkuj_DiscordAuth();
     private Kostkuj_CommandBlockList commadBlockList = new Kostkuj_CommandBlockList();
     private Kostkj_Writer kostkjWriter = new Kostkj_Writer();
@@ -36,7 +33,7 @@ public class Kostkuj implements CommandExecutor, TabCompleter {
     private String[][] Main = {
             {"Help", "Potrebujes pomoct s prikazama?", "kostkuj.menu", "/cmd", "run_command"},
             {"Pravidla", "Potřebuješ zjistit pravidla?", "kostkuj.menu", "/pravidla", "run_command"},
-            {"HLASUJ!", "Odkaz na web s hlasovanim", "kostkuj.menu", "https://czech-craft.eu/voteModel?id=12614&user=#name#", "open_url"},
+            {"HLASUJ!", "Odkaz na web s hlasováním", "kostkuj.menu", "https://czech-craft.eu/server/kostkuj/vote/?user=#name#", "open_url"},
             {"Web", "Odkaz na nas web\\n§6www.kostkuj.cz", "kostkuj.menu", "http://www.kostkuj.cz/", "open_url"},
             {"Forum", "Odkaz na nas web\\n§6www.kostkuj.cz/forum", "kostkuj.menu", "http://www.kostkuj.cz/forum", "open_url"},
             {"Shop", "Odkaz na nas web\\n§6www.kostkuj.cz/shop", "kostkuj.menu", "http://www.kostkuj.cz/shop", "open_url"},
@@ -96,13 +93,6 @@ public class Kostkuj implements CommandExecutor, TabCompleter {
             }
             this.pd.onCommand(sr, args);
             return true;
-        }  else if (args[0].equalsIgnoreCase(ECmd.KOSTKUJ_PARTICLE.getLastarg())) {
-            if (!sr.hasPermission(ECmd.KOSTKUJ_PARTICLE.getPerm())){
-                this.ss.noPerm(sr);
-                return true;
-            }
-            this.particle.Particle(args, sr);
-            return true;
         } else if(args[0].equalsIgnoreCase(ECmd.KOSTKUJ_DISCORDAUTH.getLastarg())){
             if (!sr.hasPermission(ECmd.KOSTKUJ_DISCORDAUTH.getPerm())){
                 this.ss.noPerm(sr);
@@ -160,9 +150,6 @@ public class Kostkuj implements CommandExecutor, TabCompleter {
             if (sr.hasPermission(ECmd.KOSTKUJ_POZEMEK.getPerm())){
                 cmd.add(ECmd.KOSTKUJ_POZEMEK.getLastarg());
             }
-            if (sr.hasPermission(ECmd.KOSTKUJ_PARTICLE.getPerm())){
-                cmd.add(ECmd.KOSTKUJ_PARTICLE.getLastarg());
-            }
             if (sr.hasPermission(ECmd.KOSTKUJ_COMMADBLOCKLIST.getPerm())){
                 cmd.add(ECmd.KOSTKUJ_COMMADBLOCKLIST.getLastarg());
             }
@@ -214,60 +201,6 @@ public class Kostkuj implements CommandExecutor, TabCompleter {
                 }
                 for (int i = 0; i < cmd.size(); i++){
                     if (cmd.get(i).contains(agrs[1])){
-                        tab.add(cmd.get(i));
-                    }
-                }
-            } else if (agrs[0].equalsIgnoreCase(ECmd.KOSTKUJ_PARTICLE.getLastarg())){
-                if (sr.hasPermission(ECmd.KOSTKUJ_PARTICLE_START.getPerm())) {
-                    cmd.add(ECmd.KOSTKUJ_PARTICLE_START.getLastarg());
-                }
-                if (sr.hasPermission(ECmd.KOSTKUJ_PARTICLE_STOP.getPerm())) {
-                    cmd.add(ECmd.KOSTKUJ_PARTICLE_STOP.getLastarg());
-                }
-                if (sr.hasPermission(ECmd.KOSTKUJ_PARTICLE_SHAPE.getPerm())) {
-                    cmd.add(ECmd.KOSTKUJ_PARTICLE_SHAPE.getLastarg());
-                }
-                if (sr.hasPermission(ECmd.KOSTKUJ_PARTICLE_TYP.getPerm())) {
-                    cmd.add(ECmd.KOSTKUJ_PARTICLE_TYP.getLastarg());
-                }
-                if (agrs[1] == null) {
-                    tab = cmd;
-                    return tab;
-                }
-                for (int i = 0; i < cmd.size(); i++) {
-                    if (cmd.get(i).contains(agrs[1])) {
-                        tab.add(cmd.get(i));
-                    }
-                }
-            }
-        } else if(agrs.length == 3){
-            if (agrs[1].equalsIgnoreCase(ECmd.KOSTKUJ_PARTICLE_SHAPE.getLastarg())){
-                for (int i = 0; EParticleShapes.values().length > i; i++) {
-                    if (sr.hasPermission(EParticleShapes.values()[i].getPerm())){
-                        cmd.add(EParticleShapes.values()[i].getName());
-                    }
-                }
-                if (agrs[2] == null) {
-                    tab = cmd;
-                    return tab;
-                }
-                for (int i = 0; i < cmd.size(); i++) {
-                    if (cmd.get(i).contains(agrs[2])) {
-                        tab.add(cmd.get(i));
-                    }
-                }
-            } else if (agrs[1].equalsIgnoreCase(ECmd.KOSTKUJ_PARTICLE_TYP.getLastarg())){
-                for (int i = 0; EParticle.values().length > i; i++) {
-                    if (sr.hasPermission(EParticle.values()[i].getPerm())){
-                        cmd.add(EParticle.values()[i].getName());
-                    }
-                }
-                if (agrs[2] == null) {
-                    tab = cmd;
-                    return tab;
-                }
-                for (int i = 0; i < cmd.size(); i++) {
-                    if (cmd.get(i).contains(agrs[2])) {
                         tab.add(cmd.get(i));
                     }
                 }

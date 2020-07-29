@@ -15,7 +15,8 @@ public enum EDiscordCmd {
     SAVE("/save", EKostkujRole.Moderator, new DiscordCommandSave(), "Uloží mapy."),
     RESTART("/restart", EKostkujRole.Hl_Moderator, new DiscordCommandRestart(), "Restart serveru."),
     TREST("/trest", EKostkujRole.Moderator, new DiscordCommandTrest(), "Banovací systém."),
-    UNBAN("/unban", EKostkujRole.Moderator, new DiscordCommandUnban(), "Odbanuje hráče.");
+    UNBAN("/unban", EKostkujRole.Moderator, new DiscordCommandUnban(), "Odbanuje hráče."),
+    MRES("/mres", EKostkujRole.Moderator, new DiscordCommandMres(), "Informace o residenci");
 
     private String command;
     private EKostkujRole minRole;

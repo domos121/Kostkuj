@@ -45,7 +45,7 @@ public class Usecode implements CommandExecutor {
 
         Player p = Bukkit.getPlayer(sr.getName());
 
-        HashMap<Integer, String> map = gi.getItem(key);
+        HashMap<Integer, String> map = gi.getItem(key, (Player) sr);
 
         if (map.get(1).equalsIgnoreCase("NENALEZEN")) {
 

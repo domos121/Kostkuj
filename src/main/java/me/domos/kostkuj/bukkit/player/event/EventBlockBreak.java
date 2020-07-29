@@ -19,7 +19,7 @@ public class EventBlockBreak {
     // String [0] [1]
     // String [radek] [sloupec]
 
-    private String[][] xrayblock = {{"DIAMOND_ORE", "aqua", "Diamanty", "§b"}, {"EMERALD_ORE", "green", "Emeraldy", "§a"}};
+    private String[][] xrayblock = {{"DIAMOND_ORE", "aqua", "Diamanty", "§b"}, {"EMERALD_ORE", "green", "Emeraldy", "§a"}, {"ANCIENT_DEBRIS", "dark_purple", "Ancient Debris", "§5"}};
 
 
     private MySQLis mysqlis = new MySQLis();
