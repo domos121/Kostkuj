@@ -48,6 +48,9 @@ public enum ECmd {
     CRATE_HELP("crate help", "help"),
     CRATE_CREATEKEY("crate createkey", "createkey"),
     CRATE_EDITLOCATION("crate editlocation", "editlocation"),
+    CRATE_NEWCRATE("crate newcrate", "newcrate"),
+    CRATE_EDITCOLOR("crate editcolor", "editcolor"),
+    CRATE_EDITNAME("crate editname", "editname"),
     // VOTE
     VOTE("vote", "vote"),
     VOTE_TEST("vote test", "test"),

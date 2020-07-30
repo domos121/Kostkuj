@@ -10,7 +10,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import java.util.HashMap;
 import java.util.List;
-public class CrateEditLocation {
+public class CratesEditLocation {
 
     SendSystem ss = new SendSystem();
 

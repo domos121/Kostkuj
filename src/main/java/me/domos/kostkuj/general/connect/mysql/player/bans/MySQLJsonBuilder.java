@@ -45,7 +45,7 @@ public class MySQLJsonBuilder {
 
                     slogouttime = time.getTimeFromTimeStamp(tlogouttime);
                 }
-                jsm.jsonBcKostkuj(sr, jcm.clickhoverText("  §8- §c➥" + ip_id, "", "§c" + ip_id + "§8:" + "\n §7Login: §a" + slogintime + "\n §7Login: §a" + slogouttime, "suggest_command", "/checkip " + ip_id));
+                jsm.jsonBcKostkuj(sr, jcm.clickhoverText("  §8- §c➥" + ip_id, "", "§c" + ip_id + "§8:" + "\n §7Login: §a" + slogintime + "\n §7Logout: §a" + slogouttime, "suggest_command", "/checkip " + ip_id));
             }
             this.json = "[";
         } catch (SQLException e) {

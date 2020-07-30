@@ -16,7 +16,7 @@ public class BanEmail {
         try {
             // get URL content
 
-            String a = "https://newapi.kostkuj.cz/game-request/ban-email/" + ban_id + "/user/" + user_id;
+            String a = "https://api.kostkuj.cz/game-request/ban-email/" + ban_id + "/user/" + user_id;
             url = new URL(a);
             URLConnection conn = url.openConnection();
 
