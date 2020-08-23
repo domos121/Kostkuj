@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Voucher implements CommandExecutor, TabCompleter {
+public class Voucher implements CommandExecutor,TabCompleter {
 
     SendSystem ss = new SendSystem();
     Voucher_Create voucher_create = new Voucher_Create();

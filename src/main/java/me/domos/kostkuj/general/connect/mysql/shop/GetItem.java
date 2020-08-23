@@ -26,6 +26,7 @@ public class GetItem {
                     String item = rs.getString("prod.item_id");
                     int amount = rs.getInt("prod.amount");
                     String enchant = rs.getString("prod.enchant");
+                    String nbt = rs.getString("prod.item_nbt_tag");
                     if (item == null) {
                         map.put(1, "ITEM_ERROR");
                     } else if (item.contains("PREMIUM_")) {
@@ -34,6 +35,11 @@ public class GetItem {
                     } else if (item.contains("COMMAND_")) {
                         map.put(1, "COMMAND");
                         map.put(2, item.replace("COMMAND_", ""));
+                    } else if (nbt != null) {
+                        map.put(1, "NBT");
+                        map.put(2, item);
+                        map.put(3, amount + "");
+                        map.put(4, nbt);
                     } else if (item.contains("ENCHANTED_BOOK")) {
                         map.put(1, "BOOK");
                         map.put(2, amount + "");

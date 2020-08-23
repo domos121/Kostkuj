@@ -12,6 +12,8 @@ import org.bukkit.entity.Player;
 
 import javax.security.auth.login.LoginException;
 
+import static me.domos.kostkuj.Main.discordListener;
+
 public class DiscordConnect {
 
     public static JDA jda;
@@ -31,13 +33,21 @@ public class DiscordConnect {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        DiscordConnect.jda.addEventListener(discordListener);
     }
 
     public static void stopBot(){
         sendMsg(":octagonal_sign:**kostkuj** *se odpojil*.");
+        jda.getEventManager().unregister(discordListener);
+        jda.shutdown();
     }
 
     public static void sendMsg(String msg){
+        TextChannel text = jda.getTextChannelsByName(channel, true).get(0);
+        String var0 = chatTranslateToDiscord(msg);
+        text.sendMessage(var0).queue();
+    }
+    public static void sendMsg(String msg, String channel){
         TextChannel text = jda.getTextChannelsByName(channel, true).get(0);
         String var0 = chatTranslateToDiscord(msg);
         text.sendMessage(var0).queue();

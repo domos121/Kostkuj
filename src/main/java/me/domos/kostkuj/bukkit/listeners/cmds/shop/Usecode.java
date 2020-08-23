@@ -102,6 +102,9 @@ public class Usecode implements CommandExecutor {
                     addItem = true;
                 }
             }
+        } else if (map.get(1).equalsIgnoreCase("NBT")){
+            int count = Integer.parseInt(map.get(3));
+            ass.add((Player) sr, count, map.get(2), map.get(4));
         }
 
         if (addItem){

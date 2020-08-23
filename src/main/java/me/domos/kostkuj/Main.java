@@ -53,6 +53,7 @@ public class Main extends JavaPlugin implements Listener{
     private AutoMessager am = new AutoMessager();
     public static Plugin plugin = null;
     public static Long startTime;
+    public static DiscordListener discordListener;
 
     @Override
     public void onEnable(){
@@ -72,13 +73,22 @@ public class Main extends JavaPlugin implements Listener{
         mysqlfunction.createTables();
         am.autoMessage();
         Timer.Time();
-        DiscordConnect.startBot();
-        DiscordConnect.jda.addEventListener(new DiscordListener());
+        registerJDA();
         Bukkit.getConsoleSender().sendMessage("[kostkuj] Is aktivated!");
         startTime = System.currentTimeMillis();
+        Timer.isUserVote();
     }
 
+    private void registerJDA(){
+        if (discordListener == null){
+            discordListener = new DiscordListener();
+        }
+        DiscordConnect.startBot();
+    }
+
+    @Override
     public void onDisable() {
+        super.onDisable();
         new Kostkuj_Save().saveWorld();
         DiscordConnect.stopBot();
     }

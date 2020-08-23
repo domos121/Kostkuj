@@ -21,6 +21,7 @@ public enum ConfigManager {
     private FileConfiguration fileConfiguration;
 
     ConfigManager(File file){
+        FileConfiguration fileConfiguration;
         if (!file.exists()) {
             try {
                 file.createNewFile();
@@ -31,10 +32,14 @@ public enum ConfigManager {
             Bukkit.getServer().getConsoleSender().sendMessage("Kontrola existujícího souboru.");
         }
         if(!file.getName().equalsIgnoreCase("config.yml")){
-            this.fileConfiguration = YamlConfiguration.loadConfiguration(file);
+            fileConfiguration = YamlConfiguration.loadConfiguration(file);
         } else {
-            this.fileConfiguration = Main.plugin.getConfig();
+            fileConfiguration = Main.plugin.getConfig();
         }
+
+        fileConfiguration.options().copyHeader(true);
+
+        this.fileConfiguration = fileConfiguration;
         this.file = file;
     }
 
@@ -47,7 +52,9 @@ public enum ConfigManager {
     }
 
     public void reloadConfig() {
-        fileConfiguration = YamlConfiguration.loadConfiguration(file);
+        FileConfiguration fileConfiguration = YamlConfiguration.loadConfiguration(file);
+        fileConfiguration.options().copyHeader(true);
+        this.fileConfiguration = fileConfiguration;
     }
 
     public void saveConfig(){

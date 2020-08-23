@@ -1,8 +1,10 @@
 package me.domos.kostkuj.general.connect.mysql.vote;
 
+import com.google.gson.JsonObject;
 import me.domos.kostkuj.bukkit.items.ItBuilder;
 import me.domos.kostkuj.bukkit.time.Time;
 import me.domos.kostkuj.general.connect.mysql.MySQL;
+import me.domos.kostkuj.models.voteModel.VoteTopPlayers;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -98,4 +100,30 @@ public class MysqlListener {
         }
         return 0;
     }
+
+    public boolean isTopVotersSet(){
+        try {
+            PreparedStatement ps = mysql.getStatement("SELECT * FROM game_gift_top_voters WHERE month_of_year = ?");
+            ps.setString(1, VoteTopPlayers.keyLastMonth);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            return true;
+        }
+        return false;
+    }
+
+    public void setTopVoters(JsonObject users){
+        try {
+            PreparedStatement ps = mysql.getStatement("INSERT INTO game_gift_top_voters (month_of_year, users) VALUE (? , ?)");
+            ps.setString(1, VoteTopPlayers.keyLastMonth);
+            ps.setString(2, users.toString());
+            ps.executeUpdate();
+            ps.close();
+        } catch (SQLException e) {
+        }
+    }
+
 }

@@ -51,12 +51,17 @@ public enum ECmd {
     CRATE_NEWCRATE("crate newcrate", "newcrate"),
     CRATE_EDITCOLOR("crate editcolor", "editcolor"),
     CRATE_EDITNAME("crate editname", "editname"),
+    CRATE_REMOVEITEM("crate removeitem", "removeitem"),
+    CRATE_ADDITEM("crate additem", "additem"),
+    CRATE_ADDITEMPUT("crate additemput", "put"),
     // VOTE
     VOTE("vote", "vote"),
     VOTE_TEST("vote test", "test"),
     VOTE_HELP("vote help", "help"),
     VOTE_SKLAD("vote sklad", "sklad"),
     VOTE_SKLAD_OTHER("vote sklad [user]", "sklad"),
+    VOTE_SCOREBOARD("vote scoreboard", "scoreboard"),
+    VOTE_TOPVOTERSBOARD("vote topvotersboard", "topvotersboard"),
     // USECODE
     USECODE("usecode", "usecode"),
     // DOMOS

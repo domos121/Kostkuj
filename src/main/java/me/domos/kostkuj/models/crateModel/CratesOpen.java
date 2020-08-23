@@ -38,12 +38,45 @@ public class CratesOpen {
 
     }
 
-    public void mat(final String chest, final List<ItemStack> items, final PlayerInteractEvent e){
+    public void mat(final String chest, final ItBuilder.MapAndChance items, final PlayerInteractEvent e){
         final AddItem ai = new AddItem();
         final Random r = new Random();
-        ItBuilder ib = ItBuilder.getInstance();
+        final HashMap<Integer, Integer> slots = this.getSlots();
+        final List<Integer> cisla = this.getCisla();
+        final List<ItemStack> glass = this.getGlass();
         final Inventory i = plugin.getServer().createInventory(null, 54, cCrates.getMapName().get(chest) + "_GiftChest");
         e.getPlayer().openInventory(i);
+        new BukkitRunnable(){
+            int is = 0;
+            int slot = -1;
+            public void run() {
+                for (int k = 0; cisla.size() > k; k++){
+                    i.setItem(cisla.get(k), glass.get(r.nextInt(glass.size())));
+                }
+                if (slots.size() > slot + 1){
+                    slot++;
+                } else {
+                    slot = 0;
+                }
+
+                if (is <= 68) {
+                    int ran = r.nextInt(items.getListItems().size());
+                    ItemStack randomitem = items.getListItems().get(ran);
+                    i.setItem(slots.get(slot), randomitem);
+                }
+                if (is >= 69){
+                    ItemStack winitem = items.losItem();
+                    i.setItem(slots.get(slot), winitem);
+                    i.setItem(22, winitem);
+                    ai.add(winitem, e.getPlayer());
+                    cancel();
+                }
+                is++;
+            }
+        }.runTaskTimer(Main.plugin, 0, 1);
+    }
+
+    private HashMap<Integer, Integer> getSlots(){
         final HashMap<Integer, Integer> slots = new HashMap<Integer, Integer>();
         slots.put(0, 6);
         slots.put(1, 16);
@@ -59,41 +92,21 @@ public class CratesOpen {
         slots.put(11, 10);
         slots.put(12, 2);
         slots.put(13, 4);
-        final List<Integer> cisla = getCisla();
-        final List<ItemStack> glass = new ArrayList<ItemStack>();
+        return slots;
+    }
+
+    private List<ItemStack> getGlass(){
+        List<ItemStack> glass = new ArrayList<ItemStack>();
         glass.add(ib.item(Material.LIGHT_BLUE_STAINED_GLASS_PANE, 1));
         glass.add(ib.item(Material.YELLOW_STAINED_GLASS_PANE, 1));
         glass.add(ib.item(Material.BLUE_STAINED_GLASS_PANE, 1));
         glass.add(ib.item(Material.RED_STAINED_GLASS_PANE, 1));
         glass.add(ib.item(Material.PINK_STAINED_GLASS_PANE, 1));
-        new BukkitRunnable(){
-            int is = 0;
-            int slot = -1;
-            public void run() {
-                for (int k = 0; cisla.size() > k; k++){
-                    i.setItem(cisla.get(k), glass.get(r.nextInt(glass.size())));
-                }
-                if (slots.size() > slot + 1){
-                    slot++;
-                } else {
-                    slot = 0;
-                }
-
-                int ran = r.nextInt(items.size());
-                ItemStack winitem = items.get(ran);
-                i.setItem(slots.get(slot), winitem);
-                if (is > 68){
-                    i.setItem(22, winitem);
-                    ai.add(winitem, e.getPlayer());
-                    cancel();
-                }
-                is++;
-            }
-        }.runTaskTimer(Main.plugin, 0, 1);
+        return glass;
     }
 
     private List<Integer> getCisla(){
-        final List<Integer> cisla = new ArrayList<Integer>();
+        List<Integer> cisla = new ArrayList<Integer>();
         cisla.add(0);
         cisla.add(1);
         cisla.add(3);

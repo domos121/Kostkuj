@@ -1,5 +1,7 @@
 package me.domos.kostkuj.general.connect.mysql.player;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import me.domos.kostkuj.bukkit.chat.SendSystem;
 import me.domos.kostkuj.bukkit.chat.json.CustomJsonBuilder;
 import me.domos.kostkuj.bukkit.chat.json.JsonSendMessage;
@@ -20,9 +22,9 @@ public class MPlayerDeath {
     JsonSendMessage jsm = new JsonSendMessage();
     Time time = new Time();
 
-    public void setDeath(String user, String deathmessage, Double x, Double y, Double z, String world){
+    public void setDeath(String user, String deathmessage, Double x, Double y, Double z, String world, JsonObject itemDrops){
         if (m.isConected()){
-            PreparedStatement ps = m.getStatement("INSERT INTO game_kostkuj_player_death (user_id, message, position_x, position_y, position_z, world, time) VALUE ((SELECT id FROM web_users WHERE username = ?), ?, ?, ?, ?, ?, ?)");
+            PreparedStatement ps = m.getStatement("INSERT INTO game_kostkuj_player_death (user_id, message, position_x, position_y, position_z, world, time, drop_items) VALUE ((SELECT id FROM web_users WHERE username = ?), ?, ?, ?, ?, ?, ?, ?)");
             try {
                 ps.setString(1, user);
                 ps.setString(2, deathmessage);
@@ -31,6 +33,7 @@ public class MPlayerDeath {
                 ps.setDouble(5, z);
                 ps.setString(6, world);
                 ps.setTimestamp(7, Time.getTimeDay(0));
+                ps.setObject(8, itemDrops.toString());
                 ps.executeUpdate();
             } catch (SQLException e){
                 e.printStackTrace();
@@ -46,7 +49,7 @@ public class MPlayerDeath {
 
     public void getDeath(String user, CommandSender sr){
         if (m.isConected()){
-            PreparedStatement ps = m.getStatement("SELECT * FROM game_kostkuj_player_death WHERE user_id = (SELECT id FROM web_users WHERE username = ?) ORDER BY id DESC limit 15");
+            PreparedStatement ps = m.getStatement("SELECT message, position_x, position_y, position_z, world, time, id FROM game_kostkuj_player_death WHERE user_id = (SELECT id FROM web_users WHERE username = ?) ORDER BY id DESC limit 15");
             try {
                 ps.setString(1, user);
                 ResultSet rs = ps.executeQuery();
@@ -54,12 +57,13 @@ public class MPlayerDeath {
                     int x = rs.getInt("position_x");
                     int y = rs.getInt("position_y");
                     int z = rs.getInt("position_z");
+                    int id = rs.getInt("id");
                     String msg = rs.getString("message");
                     String world = rs.getString("world");
                     Timestamp tstime = rs.getTimestamp("time");
                     String sour = "§7x:§c" + x + ", §7y:§c" + y + ", §7z:§c" + z + ", §7world: §c" + world;
                     sr.sendMessage("§8====== §7Death: §c" + user + " §8======");
-                    jsm.jsonBcKostkuj(sr, cjb.clickhoverText(" §8- §7➥§c" + time.getTimeFromTimeStamp(tstime), "dark_gray", "§c" + time.getTimeFromTimeStamp(tstime) + "\n" + sour + "\n§7Msg: §c" + msg, "suggest_command", x + " " + y + " " + z + " " + world));
+                    jsm.jsonBcKostkuj(sr, cjb.clickhoverText(" §8- §7➥§c" + time.getTimeFromTimeStamp(tstime) + " §8| §7[§c" + id + "§7]", "dark_gray", "§c" + time.getTimeFromTimeStamp(tstime) + "\n" + sour + "\n§7Msg: §c" + msg, "suggest_command", x + " " + y + " " + z + " " + world));
                 } else {
                     sr.sendMessage("§8====== §7Death: §c" + user + " §8======");
                     sr.sendMessage("§7Smrti nenalezeny.");
@@ -68,11 +72,12 @@ public class MPlayerDeath {
                     int x = rs.getInt("position_x");
                     int y = rs.getInt("position_y");
                     int z = rs.getInt("position_z");
+                    int id = rs.getInt("id");
                     String msg = rs.getString("message");
                     String world = rs.getString("world");
                     String sour = "§7x:§c" + x + ", §7y:§c" + y + ", §7z:§c" + z + ", §7world: §c" + world;
                     Timestamp tstime = rs.getTimestamp("time");
-                    jsm.jsonBcKostkuj(sr, cjb.clickhoverText(" §8- §7➥§c" + time.getTimeFromTimeStamp(tstime), "dark_gray", "§c" + time.getTimeFromTimeStamp(tstime) + "\n" + sour + "\n§7Msg: §c" + msg, "suggest_command", x + " " + y + " " + z + " " + world));
+                    jsm.jsonBcKostkuj(sr, cjb.clickhoverText(" §8- §7➥§c" + time.getTimeFromTimeStamp(tstime) + " §8| §7[§c" + id + "§7]", "dark_gray", "§c" + time.getTimeFromTimeStamp(tstime) + "\n" + sour + "\n§7Msg: §c" + msg, "suggest_command", x + " " + y + " " + z + " " + world));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -84,5 +89,26 @@ public class MPlayerDeath {
                 }
             }
         }
+    }
+
+    public JsonObject getDropItems(int deathId){
+        JsonObject jsonObject = null;
+        if (m.isConected()){
+            PreparedStatement ps = m.getStatement("SELECT drop_items FROM game_kostkuj_player_death WHERE id = ?");
+            try {
+                ps.setInt(1, deathId);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()){
+                    if (rs.getString("drop_items") == null){
+                        return jsonObject;
+                    }
+                    String jsonObjects = rs.getString("drop_items");
+                    jsonObject = new JsonParser().parse(jsonObjects).getAsJsonObject();
+                }
+            } catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
+        return jsonObject;
     }
 }

@@ -3,12 +3,19 @@ package me.domos.kostkuj.bukkit.time;
 import me.domos.kostkuj.Main;
 import me.domos.kostkuj.bukkit.chat.SendSystem;
 import me.domos.kostkuj.bukkit.chat.json.JsonBroadCast;
+import me.domos.kostkuj.bukkit.chat.json.JsonSendMessage;
 import me.domos.kostkuj.bukkit.chat.manage.voteMute.VoteMuteSettings;
 import me.domos.kostkuj.bukkit.listeners.cmds.kostkuj.Kostkuj_Save;
 import me.domos.kostkuj.general.connect.mysql.commandRequest.MRequestGet;
 import me.domos.kostkuj.general.fileManager.ECfg;
 import me.domos.kostkuj.general.forFun.gameEvents.writer.WriterCore;
+import me.domos.kostkuj.models.voteModel.Vote;
+import me.domos.kostkuj.models.voteModel.VoteBoard;
+import me.domos.kostkuj.models.voteModel.VoteScoreBoardSettings;
+import me.domos.kostkuj.models.voteModel.VoteTopPlayers;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.block.BlockFace;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -49,16 +56,6 @@ public class Timer {
                 // Přečte všechny requesty
                 mrg.getRequest();
                 // Přečte všechny časy z config.yml
-                for(int i = 0; i < currenttime.length; i++) {
-                    // pokud se některej rovná s aktuálním
-                    if (currenttime[i][0].equals(unixtime)) {
-                        if(currenttime[i][1].equalsIgnoreCase("msg")){
-                            jbc.jsonBcKostkuj("[\n" + "  {\n" + "    \"text\":\"#info#\"\n" + "  },\n" + "  {\n" + "    \"text\":\" Nyni muzes hlasovat: \",\n" + "    \"color\":\"gray\"\n" + "  },\n" + "  {\n" + "    \"text\":\"➥ZDE.\",\n" + "    \"color\":\"dark_gray\",\n" + "    \"clickEvent\":{\n" + "      \"action\": \"open_url\",\n" + "      \"value\":\"https://czech-craft.eu/server/kostkuj/vote/?user=#sr#\"\n" + "    },\n" + "    \"hoverEvent\":{\n" + "      \"action\": \"show_text\",\n" + "      \"value\":\"§cNastala suda hodina:\\n§aNyni muzes hlasovat.\\nKliknutím se dostanes na svuj odkaz.\"\n" + "    }\n" + "  }\n" + "]");
-                        }
-                        // ukončí cykl
-                        break;
-                    }
-                }
             }
         }.runTaskTimer(Main.plugin, 0, 20 * 57); // plugin, Čas, nwm
     }
@@ -134,12 +131,24 @@ public class Timer {
         }.runTaskTimer(Main.plugin, 20 * 5, 20*5);
     }
 
-    public static void saveMap(){
+    public static void isUserVote(){
         final Kostkuj_Save s = new Kostkuj_Save();
         new BukkitRunnable(){
             public void run() {
-                s.saveWorld();
+                JsonSendMessage jsm = new JsonSendMessage();
+                VoteScoreBoardSettings voteScoreBoardSettings = new VoteScoreBoardSettings();
+                new VoteTopPlayers().setTopPlayers("01");
+                if (voteScoreBoardSettings.isAllow()){
+                    String[] loc = voteScoreBoardSettings.getLocation().split(",");
+                    VoteBoard voteScoreBoard = new VoteBoard(new Location(Bukkit.getWorld(loc[0]), Integer.parseInt(loc[1]), Integer.parseInt(loc[2]), Integer.parseInt(loc[3])), BlockFace.valueOf(voteScoreBoardSettings.getBlockFace().toUpperCase()));
+                    voteScoreBoard.setScoreBoard();
+                }
+                for (Player c : Bukkit.getServer().getOnlinePlayers()){
+                    if (Vote.getInstance().isVote(c.getName())){
+                        jsm.jsonBcKostkuj(c, "[\n" + "  {\n" + "    \"text\":\"#prefix#\"\n" + "  },\n" + "  {\n" + "    \"text\":\" Nyni muzes hlasovat: \",\n" + "    \"color\":\"gray\"\n" + "  },\n" + "  {\n" + "    \"text\":\"➥ZDE.\",\n" + "    \"color\":\"dark_gray\",\n" + "    \"clickEvent\":{\n" + "      \"action\": \"open_url\",\n" + "      \"value\":\"https://czech-craft.eu/server/kostkuj/vote/?user=" + c.getName() + "\"\n" + "    },\n" + "    \"hoverEvent\":{\n" + "      \"action\": \"show_text\",\n" + "      \"value\":\"§cNastal tvůj čas:\\n§aNyni muzes hlasovat.\\nKliknutím se dostanes na svuj odkaz.\"\n" + "    }\n" + "  }\n" + "]");
+                    }
+                }
             }
-        }.runTaskTimer(Main.plugin, 20*10, 20*60*10);
+        }.runTaskTimer(Main.plugin, 20*2*60, 20*60*15);
     }
 }

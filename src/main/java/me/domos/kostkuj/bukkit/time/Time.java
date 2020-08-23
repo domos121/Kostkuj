@@ -1,6 +1,7 @@
 package me.domos.kostkuj.bukkit.time;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -69,6 +70,32 @@ public class Time {
             return true;
         }
         return false;
+    }
+
+    public java.sql.Timestamp getTimeStumpFromString(String sdate){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date date = null;
+        try {
+            date = format.parse(sdate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        java.sql.Timestamp stamp = new java.sql.Timestamp(date.getTime());
+        return stamp;
+    }
+
+    public java.sql.Timestamp getTimeStumpFromString(String sdate, String dateformat){
+        SimpleDateFormat format = new SimpleDateFormat(dateformat);
+        Date date = null;
+        try {
+            date = format.parse(sdate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        java.sql.Timestamp stamp = new java.sql.Timestamp(date.getTime());
+        return stamp;
     }
 
     public long getTimeForTemp(long cas, String volba){
@@ -184,4 +211,35 @@ public class Time {
 
         return mounth + "M, " + day + "D, " + hour + "h, " + minute + "m";
     }
+
+    public String getMonth(int month){
+        switch (month) {
+            case 1:
+                return "leden";
+            case 2:
+                return "únor";
+            case 3:
+                return "březen";
+            case 4:
+                return "duben";
+            case 5:
+                return "květen";
+            case 6:
+                return "červen";
+            case 7:
+                return "červenec";
+            case 8:
+                return "srpen";
+            case 9:
+                return "září";
+            case 10:
+                return "říjen";
+            case 11:
+                return "listopad";
+            case 12:
+                return "prosinec";
+        }
+        return null;
+    }
+
 }

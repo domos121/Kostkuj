@@ -1,11 +1,13 @@
 package me.domos.kostkuj.general.forFun.gameEvents.writer;
 
 import me.domos.kostkuj.Main;
+import me.domos.kostkuj.bukkit.chat.ActionBarMessage;
 import me.domos.kostkuj.bukkit.chat.SendSystem;
 import me.domos.kostkuj.general.KeyGenerator;
 import me.domos.kostkuj.general.connect.mysql.CraftCoin.MCraftCoins;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
@@ -43,17 +45,27 @@ public class WriterCore {
     private void write() {
         final int maxTime = 120*20;
         WriteConfig.setStart(createAnswer());
-        ss.broadCast(WriteConfig.getQuestion());
+        if(!typs.getName().equalsIgnoreCase(EWriterTyps.WRITE_TEXT.getName())) {
+            ss.broadCast(WriteConfig.getQuestion());
+        }
         new BukkitRunnable(){
             int currentTime = maxTime;
+            int current = 0;
             @Override
             public void run() {
                 --currentTime;
+                current++;
                 if (!WriteConfig.isStart()){
                     Player p = WriteConfig.getWinPlayer();
                     ss.broadCast("§6Vyhrál: §a" + p.getDisplayName() + "\n§6Správná odpověď: §a" + WriteConfig.getAnswer());
                     mCraftCoins.setCC(p.getName(), 10, 7, true);
                     this.cancel();
+                }
+                if (typs.getName().equalsIgnoreCase(EWriterTyps.WRITE_TEXT.getName())){
+                    if (current > 35){
+                        new ActionBarMessage().sendBroadcastMsg(WriteConfig.getQuestion());
+                        current = 0;
+                    }
                 }
                 if(currentTime == 15*20){
                     ss.broadCast("§6Posledních §a15s §6pro zaslání odpovědi.");
@@ -68,10 +80,11 @@ public class WriterCore {
     }
 
     private boolean createAnswer(){
-        if (this.typs == EWriterTyps.QESTIONS){
+        /*if (this.typs == EWriterTyps.QESTIONS){
             createQuestion();
             return true;
-        } else if (this.typs == EWriterTyps.MATH){
+        } else*/
+        if (this.typs == EWriterTyps.MATH){
             createExample();
             return true;
         } else if (this.typs == EWriterTyps.WRITE_TEXT){
@@ -81,6 +94,7 @@ public class WriterCore {
         return false;
     }
 
+    @NotNull
     private String createExample (){
         CreateExample example = new CreateExample(dificluty);
         WriteConfig.setAnswer(example.getAnswer() + "", "§6Kolik se rovná: §a'" + example.getExample() + "'§6?");
@@ -89,8 +103,8 @@ public class WriterCore {
 
     private boolean createKey(){
         KeyGenerator keyGen = new KeyGenerator();
-        String key = keyGen.getSerialKey((int)(dificluty.toInt()*2.5));
-        WriteConfig.setAnswer(key, "§6Napiš do chatu jako první: '§a" + key + "§6'!");
+        String key = keyGen.getSerialKey((dificluty.toInt()*3), true);
+        WriteConfig.setAnswer(key, "§6§lNapiš do chatu jako první: '§a§l" + key + "§6§l'!");
         return true;
     }
 

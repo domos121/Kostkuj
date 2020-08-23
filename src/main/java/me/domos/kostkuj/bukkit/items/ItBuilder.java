@@ -10,7 +10,9 @@ import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class ItBuilder {
 
@@ -102,28 +104,92 @@ public class ItBuilder {
         return item;
     }
 
-    public List<ItemStack> koloItems(List<?> it){
-        List<ItemStack> items = new ArrayList<ItemStack>();
+    public MapAndChance koloItems(List<String> it){
+        List<ItemStack> listItems = new ArrayList<>();
+        MapAndChance mapAndChance = new MapAndChance();
+        HashMap<Integer, ItemStack> items = new HashMap<>();
+        int totalchance = 0;
         for (int i = 0; it.size() > i; i++){
-            if (it.get(i).toString().contains("CRAFTCOINS_")){
-                String[] name = it.get(i).toString().split(",");
-                items.add(craftCoin(name[1]));
-            } else if (it.get(i).toString().contains("PREMIUM_")){
+            String[] splitToItem = it.get(i).split("%");
+            int chance = Integer.parseInt(splitToItem[1]);
+            totalchance = totalchance + chance;
+            if (splitToItem[0].contains("CRAFTCOINS_")){
+                String[] name = splitToItem[0].split(",");
+                ItemStack item = craftCoin(name[1]);
+                items.put(totalchance,item);
+                listItems.add(item);
+            } else if (splitToItem[0].contains("PREMIUM_")){
 
-            } else if(it.get(i).toString().contains("EITEM_")) {
-                String[] name = it.get(i).toString().split(",");
-                items.add(enchitem(name[1], Integer.parseInt(name[2]), name[3].replace("|", ",")));
-            } else if (it.get(i).toString().contains("BOOK_")){
-                String[] name = it.get(i).toString().split(",");
-                items.add(enchBook("ENCHANTED_BOOK", 1, name[1].replace("|", ",")));
-            } else if (it.get(i).toString().contains("KEY_")){
-                String[] name = it.get(i).toString().split(",");
-                items.add(key("TRIPWIRE_HOOK", Integer.parseInt(name[1]), name[2]));
+            } else if (splitToItem[0].contains("ENCHANTED_BOOK")){
+                String[] name = splitToItem[0].split(",");
+                String names = name[1];
+                for (int is = 2; name.length > is; is++){
+                    names = names + ";" + name[is];
+                }
+                ItemStack item = enchBook("ENCHANTED_BOOK", 1, names.replace("|", ","));
+                items.put(totalchance,item);
+                listItems.add(item);
+            } else if(splitToItem[0].contains("EITEM_")) {
+                String[] name = splitToItem[0].split(",");
+                String names = name[3];
+                for (int is = 4; name.length > is; is++){
+                    names = names + ";" + name[is];
+                }
+                ItemStack item = enchitem(name[1], Integer.parseInt(name[2]), names.replace("|", ","));
+                items.put(totalchance,item);
+                listItems.add(item);
+            }  else if (splitToItem[0].contains("KEY_")){
+                String[] name = splitToItem[0].split(",");
+                ItemStack item = key("TRIPWIRE_HOOK", Integer.parseInt(name[1]), name[2]);
+                items.put(totalchance,item);
+                listItems.add(item);
             } else {
-                String[] name = it.get(i).toString().split(",");
-                items.add(item(Material.getMaterial(name[0]), Integer.parseInt(name[1])));
+                String[] name = splitToItem[0].split(",");
+                ItemStack item = item(Material.getMaterial(name[0]), Integer.parseInt(name[1]));
+                items.put(totalchance,item);
+                listItems.add(item);
             }
         }
-        return items;
+        mapAndChance.setItems(items, totalchance, listItems);
+        return mapAndChance;
+    }
+
+    public class MapAndChance{
+        private HashMap<Integer, ItemStack> items;
+        private Integer maxChance;
+        private List<ItemStack> listItems;
+
+        public void setItems(HashMap<Integer, ItemStack> items, Integer maxChance, List<ItemStack> listItems){
+            this.listItems = listItems;
+            this.items = items;
+            this.maxChance = maxChance;
+        }
+
+        public Integer getChance() {
+            return maxChance;
+        }
+
+        public HashMap<Integer, ItemStack> getItems() {
+            return items;
+        }
+
+        public List<ItemStack> getListItems() {
+            return listItems;
+        }
+
+        public ItemStack losItem(){
+            Random random = new Random();
+            int ranNum = random.nextInt(this.maxChance);
+            if (this.items.containsKey(ranNum)){
+                return this.items.get(ranNum);
+            } else {
+                for (int i = ranNum; i <= maxChance; i++){
+                    if (this.items.containsKey(i)){
+                        return this.items.get(i);
+                    }
+                }
+            }
+            return null;
+        }
     }
 }

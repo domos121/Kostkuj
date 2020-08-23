@@ -22,7 +22,7 @@ public class ConfigCrates {
     private static HashMap<String, String> mapKeys;
     private static HashMap<String, String> mapName;
     private static HashMap<String, String> mapNameInvert;
-    private static HashMap<String,List<?>> mapItems;
+    private static HashMap<String,List<String>> mapItems;
 
     public void setCfg() {
             List<String> get_chests = new ArrayList<String>();
@@ -31,7 +31,7 @@ public class ConfigCrates {
             HashMap<String, String> get_mapKeys = new HashMap();
             HashMap<String, String> get_mapName = new HashMap();
             HashMap<String, String> get_mapNameInvert = new HashMap();
-            HashMap<String, List<?>> get_mapItems = new HashMap();
+            HashMap<String, List<String>> get_mapItems = new HashMap();
             for (String key : ConfigManager.CRATES.getConfig().getConfigurationSection("chests").getKeys(false)) {
                 Bukkit.getServer().getConsoleSender().sendMessage("§4" + key);
                 get_keys.add(ConfigManager.CRATES.getConfig().getString("chests." + key + ".key"));
@@ -40,7 +40,7 @@ public class ConfigCrates {
                 get_mapKeys.put(key, ConfigManager.CRATES.getConfig().getString("chests." + key + ".key"));
                 get_mapName.put(key, ConfigManager.CRATES.getConfig().getString("chests." + key + ".name"));
                 get_mapNameInvert.put(ConfigManager.CRATES.getConfig().getString("chests." + key + ".name"), key);
-                get_mapItems.put(key, ConfigManager.CRATES.getConfig().getList("chests." + key + ".items"));
+                get_mapItems.put(key, ConfigManager.CRATES.getConfig().getStringList("chests." + key + ".items"));
             }
 
             ConfigCrates.name = get_name;
@@ -76,7 +76,7 @@ public class ConfigCrates {
         return mapNameInvert;
     }
 
-    public HashMap<String, List<?>> getMapItems() {
+    public HashMap<String, List<String>> getMapItems() {
         return mapItems;
     }
 }

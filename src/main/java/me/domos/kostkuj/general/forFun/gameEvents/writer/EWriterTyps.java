@@ -8,8 +8,8 @@ import java.util.Random;
 public enum EWriterTyps {
 
     MATH(),
-    WRITE_TEXT(),
-    QESTIONS();
+    WRITE_TEXT();
+    //QESTIONS()
 
     private String name;
 

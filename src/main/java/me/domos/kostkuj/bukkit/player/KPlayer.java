@@ -3,6 +3,8 @@ package me.domos.kostkuj.bukkit.player;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -32,6 +34,7 @@ public class KPlayer{
         registry.remove(customplayer);
     }
 
+    @Nullable
     @SuppressWarnings("rawtypes")
     public static KPlayer getPlayer(Player player){
         Iterator iterator = registry.iterator();
@@ -43,7 +46,7 @@ public class KPlayer{
         return null;
     }
 
-    public static KPlayer getPlayer(CommandSender sr){
+    public static KPlayer getPlayer(@NotNull CommandSender sr){
         Player player = Bukkit.getPlayer(sr.getName());
         return getPlayer(player);
     }
